@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   <typeAliases>
+   	    <typeAlias alias="Planner" type="odga.bt.domain.Planner"/>
+   	    <typeAlias alias="S_Planner" type="odga.bt.domain.S_Planner"/>
+   	    <typeAlias alias="Touritems" type="odga.bt.domain.Touritems"/>
+   		<typeAlias alias="Area_T" type="odga.bt.domain.Area_T"/>
+   		<typeAlias alias="Sigungu_T" type="odga.bt.domain.Sigungu_T"/>  		
+   		<typeAlias alias="Review" type="odga.bt.domain.Review"/>
+   		<typeAlias alias="Reply" type="odga.bt.domain.Reply"/>
+   		<typeAlias alias="Like_T" type="odga.bt.domain.Like_t"/> 		
+   		<typeAlias alias="Member" type="odga.bt.domain.Member"/>	
+   		<typeAlias alias="Admin" type="odga.bt.domain.Admin"/>
+		<typeAlias alias="Support" type="odga.bt.domain.Support"/>
+		<typeAlias alias="ReviewListResult" type="odga.bt.domain.ReviewListResult"/>
+		
+		<typeAlias alias="TouritemsVo" type="odga.bt.vo.TouritemsVo"/>
+		<typeAlias alias="Searchcode" type="odga.bt.vo.Searchcode"/>
+		<typeAlias alias="Chart" type="odga.bt.vo.Chart"/>
+   		<typeAlias alias="GenderChart" type="odga.bt.vo.GenderChart"/>
+   		<typeAlias alias="Statistics" type="odga.bt.vo.Statistics"/>
+   		<typeAlias alias="ReviewDetail" type="odga.bt.vo.ReviewDetail"/>
+   		<typeAlias alias="DetailVo" type="odga.bt.vo.DetailVo"/>
+   		<typeAlias alias="ReviewVo" type="odga.bt.vo.ReviewVo"/>
+   </typeAliases>
+   
+   <mappers>
+	   <mapper resource="odga/bt/mapper/ReviewMapper.xml"/>
+	   <mapper resource="odga/bt/mapper/PlannerMapper.xml"/>  	
+	   <mapper resource="odga/bt/mapper/MypageMapper.xml"/>
+	   <mapper resource="odga/bt/mapper/AdminMapper.xml"/> 
+	   <mapper resource="odga/bt/mapper/MemberMapper.xml"/>  	  
+   </mappers>
+</configuration>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="odga.bt.mapper.TouritemsMapper">
+
+	<select id="selectPerPage" resultType="Touritems" parameterType="TouritemsVo" >
+	<![CDATA[ 
+	select * from (select ROWNUM rnum, aa.* from (select * from TOURITEMS where FIRSTIMAGE != '(null)' and TEL != '(null)' order by dbms_random.value) aa) 
+	  where rnum>#{startRow} and rnum<=#{endRow}
+	]]>
+	</select>
+	
+	<select id="selectHotspot" resultType="Touritems" parameterType="TouritemsVo" > 
+	select * from TOURITEMS where FIRSTIMAGE != '(null)' and TEL != '(null)' order by dbms_random.value
+	</select>
+	
+	<select id="selectByCatgo" resultType="Touritems" parameterType="TouritemsVo" >
+	<![CDATA[ 
+	select * from (select ROWNUM rnum, aa.* 
+	from (select * from TOURITEMS where ${catgo} like '%'||#{keyword}||'%' order by ${catgo}) aa) 
+	  where rnum>#{startRow} and rnum<=#{endRow}
+	]]>
+	</select>	
+
+	<select id="selectCount" resultType="long">
+		select count(*) from TOURITEMS
+	</select>
+	
+	<select id="selectCountByCatgo" resultType="long" parameterType="TouritemsVo">
+		select count(*) from TOURITEMS where ${catgo} like '%'||#{keyword}||'%'
+	</select>
+
+	<select id="selectByTitle" parameterType="String" resultType="Touritems">
+ 	 	select * from TOURITEMS where contentid=#{contentid}
+ 	 </select>
+ 	 
+
+</mapper>

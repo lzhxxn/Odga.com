@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="odga.bt.mapper.MypageMapper">
+<!-- 나의 좋아요 -->
+	<resultMap type="Like_T" id="Like_T">
+		<result column="li_id" property="li_id"/>
+		<result column="likeflag" property="likeflag"/>
+		<result column="b_id" property="b_id"/>
+		<result column="m_id" property="m_id"/>
+	</resultMap>
+	
+	<resultMap type="Review" id="Review">
+		<result column="b_id" property="b_id"/>
+		<result column="b_writer" property="b_writer"/>
+		<result column="b_subject" property="b_subject"/>
+		<result column="b_content" property="b_content"/>
+		<result column="b_rdate" property="b_rdate"/>
+		<result column="b_catgo" property="b_catgo"/>
+		<result column="b_like" property="b_like"/>
+		<result column="m_id" property="m_id"/>
+		<collection property="likgt" resultMap="Like_T"/>
+	</resultMap>
+	
+	<select id="listMyLike" parameterType="long" resultMap="Review">
+		select * from board where b_id IN(select b_id from like_t where m_id=#{m_id})
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateS" parameterType="Member">
+		update member set m_name=#{m_name}, M_PWD=#{m_pwd}, M_PHONE=#{m_phone}, M_BIRTH=#{m_birth}, m_fname=#{m_fname}, m_ofname=#{m_ofname}, m_about=#{m_about} where  M_EMAIL=#{m_email}
+	</update>
+	<update id="updateNofile" parameterType="Member">
+		update member set m_name=#{m_name}, M_PWD=#{m_pwd}, M_PHONE=#{m_phone}, M_BIRTH=#{m_birth}, m_about=#{m_about} where M_EMAIL=#{m_email}
+	</update>
+	<!-- 회원 탈퇴 -->
+	<delete id="leaveS" parameterType="Member">	
+		delete from MEMBER where M_EMAIL=#{m_email} and M_PWD=#{m_pwd}		
+	</delete>
+	
+	<!-- 마이페이지 나의 일정 가져오기 -->	
+	<select id="myPlanner" parameterType="long" resultType="Planner">
+		select * from planner where m_id= #{m_id} order by p_id desc
+	</select>
+	
+	<!-- 마이페이지 나의 일정 디테일 정보 -->	
+	<select id="thisplanner" parameterType="long" resultType="Planner">
+	select * from planner where p_id= #{p_id}
+	</select>
+	
+	<select id="planDetail" parameterType="long" resultType="S_Planner">
+   		select * from S_planner where p_id= #{p_id} order by sp_day
+   </select>
+	
+	<select id="detailItem" parameterType="String" resultType="Touritems">
+	select * from TOURITEMS where CONTENTID= #{contentid}
+	</select>
+	
+	<!-- 나의 여행 후기 -->
+	<select id="selectByReview" parameterType="long" resultType="Review">
+	select * from BOARD where M_ID=#{M_ID} order by b_id desc
+	</select>
+	
+	<update id="updateByB_id" parameterType="Review">
+	update BOARD set B_SUBJECT=#{b_subject}, B_CONTENT=#{b_content}, B_IMG=#{b_img}, B_CATGO=#{b_catgo} where B_ID=#{b_id}
+	 </update>
+	
+	<update id="updateWithoutImg" parameterType="Review">
+	update BOARD set B_SUBJECT=#{b_subject}, B_CONTENT=#{b_content}, B_CATGO=#{b_catgo} where B_ID=#{b_id} 
+	</update>
+	
+	<delete id="deleteByB_id" parameterType="long">
+	delete from BOARD where B_ID=#{b_id} 
+	</delete>
+	
+	<!-- 문의하기 리스트 마이페이지-->
+ 	<select id="m_notifications" resultType="Support" parameterType="long">
+ 		select * from SUPPORT natural join MEMBER where ORIGIN_NO IN(select ORIGIN_NO from support where m_id=#{m_id}) order by ORIGIN_NO desc, GROUP_ORD asc
+ 	</select>
+</mapper>

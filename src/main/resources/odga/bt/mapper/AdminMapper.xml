@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="odga.bt.mapper.AdminMapper">
+
+<!-- 플래너 지역 선호도 -->		
+	<select id="areaChart" resultType="Chart">
+		select count(t.areacode) as "count", a.area 
+		from s_planner s, touritems t,area_t a 
+		where s.contentid=t.contentid and t.areacode=a.areacode 
+		group BY a.area ORDER BY "count" desc
+	</select>
+	
+<!--  일자별 회원 수치 -->		
+	<select id="memberChart" resultType="Member">
+		select m_rdate,count(*) "count" from member group by m_rdate order by "count" desc
+	</select>
+	
+<!-- 회원 성비 -->
+	<select id="female" resultType="GenderChart">
+		select count(m_gender) femaleCnt from member where m_gender='여자'
+	</select>
+	<select id="male" resultType="GenderChart">
+		select count(m_gender) maleCnt from member where m_gender='남자'
+	</select>
+
+<!-- 기초 통계 -->
+	<select id="countMemeber" resultType="Statistics">
+		select count(*) memberCnt from member
+	</select>
+	<select id="countBoard" resultType="Statistics">
+		select count(*) boardCnt from board
+	</select>
+	<select id="countTouritem" resultType="Statistics">
+		select count(*) tourCnt from touritems
+	</select>
+	<select id="lastestMember" resultType="Statistics">
+		select TO_CHAR(max(m_rdate),'yyyy-MM-dd') m_rdate from member
+	</select>
+	<select id="lastestBoard" resultType="Statistics">
+		select TO_CHAR(max(b_rdate),'yyyy-MM-dd') b_rdate from board
+	</select>
+	<select id="lastestPlanner" resultType="Statistics">
+		select TO_CHAR(max(p_rdate),'yyyy-MM-dd') p_rdate from planner
+	</select>
+	
+<!-- 관리자 리스트 -->
+	<select id="listAdmin" resultType="Member">
+		select * from member where m_verify=9 order by m_id
+	</select>
+	<select id="lastestAdmin" resultType="Statistics">
+		select Max(m_rdate) m_rdate from member where m_verify=9
+	</select>
+	
+<!--인기 관광지 -->
+	<select id="bestTouritem" resultType="Touritems">
+		<![CDATA[ 
+		select * from touritems where contentid IN(
+		select contentid from (select contentid,count(contentid) "count" 
+		from s_planner group by contentid order by "count" desc)
+		where rownum <=1)
+		]]>
+	</select>
+	
+<!-- 회원 리스트 -->
+	<select id="list" resultType="Member">	
+		select * from MEMBER order by M_ID	
+	</select>
+	
+<!-- 문의하기 상세페이지 -->
+ 	<select id="selectByTitle" parameterType="long" resultType="Support">
+ 		select * from SUPPORT where S_ID=#{S_ID}
+ 	</select>
+	<!-- 문의하기 답글 작성 -->
+ 	<insert id="insert_reS" parameterType="Support">
+ 	 	insert into SUPPORT values(SUPPORT_ID.nextval, #{s_subject}, #{s_content}, SYSDATE, #{m_id}, #{origin_no}, 1)
+ 	</insert>	 		
+	<!-- 문의하기 리스트  관리자-->
+ 	<select id="notifications" resultType="Support">
+ 		select S_ID, S_SUBJECT, S_RDATE, M_NAME, M_VERIFY from SUPPORT natural join MEMBER order by ORIGIN_NO desc, GROUP_ORD asc
+ 	</select>
+ 	<!-- 문의하기 삭제 -->
+ 	<delete id="delete" parameterType="long">
+ 	 	delete from SUPPORT where S_ID=#{s_id}  
+ 	 </delete>
+</mapper>

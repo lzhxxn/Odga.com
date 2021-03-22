@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="odga.bt.mapper.ReviewMapper">
+	<select id="review" resultType="Review">
+		select * from BOARD order by B_ID desc
+	</select>
+	
+	<select id="getReview" resultType="Review" parameterType="long">
+		select * from BOARD where B_ID=#{b_id}	
+	</select>	
+	
+	<insert id="insert" parameterType="Review"> 
+		insert into BOARD values(BOARD_ID.nextval, #{b_writer}, #{b_subject}, #{b_content}, #{b_img}, SYSDATE, #{b_catgo}, 0, #{m_id},0)
+ 	</insert><!--#{b_like}#{m_id}#{a_id}-->
+ 		
+	<!-- 문의하기 작성 -->
+ 	<insert id="insertS" parameterType="Support">
+ 	 	insert into SUPPORT values(SUPPORT_ID.nextval, #{s_subject}, #{s_content}, SYSDATE, #{m_id}, SUPPORT_ORIGIN_NO.nextval, 0)
+ 	</insert>		 	
+	
+	<!-- 검색 -->
+	<select id="searchList" resultType="Review" parameterType="map">
+		select * from BOARD 
+		<include refid="search"></include>
+		order by B_ID desc, b_rdate desc
+	</select>	
+	<select id="countSearch" resultType="int" parameterType="map">
+		select count(*) from BOARD 
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'all'">
+				where B_WRITER like '%'||#{keyword}||'%'
+				or B_CONTENT like '%'||#{keyword}||'%'
+				or B_SUBJECT like '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				where ${searchOption} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 카테고리 -->
+	<select id="catgoList" resultType="Review" parameterType="String">
+		select * from BOARD 
+		where b_catgo like '%'||#{keyword}||'%'	
+		order by B_ID desc, b_rdate desc
+	</select>	
+	<select id="countCatgo" resultType="int" parameterType="String">
+		select count(*) from BOARD 
+		where b_catgo like '%'||#{keyword}||'%'	
+	</select>
+	
+	<select id="countFamily" resultType="int">
+		<include refid="catgo"></include>'가족여행'
+	</select>
+	<select id="countCouple" resultType="int">
+		<include refid="catgo"></include>'커플여행'
+	</select>
+	<select id="countFriend" resultType="int">
+		<include refid="catgo"></include>'우정여행'
+	</select>
+	<select id="countAlone" resultType="int">
+		<include refid="catgo"></include>'혼자여행'
+	</select>
+	<select id="countPackage" resultType="int">
+		<include refid="catgo"></include>'패키지여행'
+	</select>
+	<sql id="catgo">		
+		select count(*) from BOARD 
+		where b_catgo =				
+	</sql>
+		
+	<!-- 댓글 -->
+	<select id="listReply" resultType="Reply" parameterType="long">
+		select * from REPLY where b_id=#{b_id} order by RE_ID desc
+	</select>
+	<select id="countReply" resultType="int" parameterType="long">
+		select count(*) from REPLY where b_id=#{b_id}
+	</select>
+	<insert id="insert_re" parameterType="Reply"> 
+		INSERT INTO reply VALUES (REPLY_ID.nextval, #{re_writer}, #{re_content}, SYSDATE,#{b_id},#{re_fname})
+ 	</insert>	
+ 	<delete id="deleteReply" parameterType="long">
+		delete from reply where re_id=#{re_id}
+	</delete>
+	<update id="upReplyCnt" parameterType="long">
+	    update board set b_reply=b_reply+1 where b_id=#{b_id}
+	</update>
+	
+ 	<!-- 좋아요 -->
+ 	<update id="likeUp" parameterType="Review">
+	    update BOARD set b_like=#{b_like}+1 where b_id=#{b_id}
+	</update>
+	<update id="likeDown" parameterType="Review">
+	    update BOARD set b_like=#{b_like}-1 where b_id=#{b_id}
+	</update>
+	<insert id="insertLike" parameterType="Like_T"> 
+		insert into LIKE_T values(LIKE_ID.nextval,0, #{b_id}, #{m_id})
+ 	</insert>	
+	<select id="listLike" resultType="Like_T" parameterType="long">
+		select * from LIKE_T where b_id=#{b_id} and m_id=#{m_id}
+	</select>
+	<update id="likeClick" parameterType="map">
+	    update LIKE_T set likeflag=1 where b_id=#{b_id} and m_id=#{m_id}
+	</update>
+	<update id="likeUnclick" parameterType="Like_T">
+	    update LIKE_T set likeflag=0 where b_id=#{b_id} and m_id=#{m_id}
+	</update>	
+	
+	<!-- 이전글 다음글 -->
+	<select id="getPreReview" resultType="Review" parameterType="long">
+		<![CDATA[ 
+		select * from board where b_id<#{b_id} and b_id in((select MAX(b_id) from board where b_id<#{b_id}))
+		]]>
+	</select>
+	<select id="getNextReview" resultType="Review" parameterType="long">
+		<![CDATA[ 
+		select * from board where b_id>#{b_id} and b_id in((select MIN(b_id) from board where b_id>#{b_id}))
+		]]>
+	</select>
+	
+	<!-- 작성자 정보 가져오기 -->
+	<select id="getWriterInfo" resultType="Member" parameterType="long">
+		select * from member where m_id=(select m_id from board where b_id=#{b_id})
+	</select>
+	
+	<!-- 베스트리뷰 추출 -->
+    <select id="selectBestReview" resultType="Review" >
+		<![CDATA[ 
+		select * from (select * from BOARD order by B_LIKE desc) where rownum<2
+		]]>
+	</select>
+	
+	<!-- 리뷰 리스팅 - 페이징 검색기능 -->
+	<select resultType="Review" id="selectPerPage" parameterType="ReviewVo">
+		<![CDATA[ 
+			select * from (select ROWNUM rnum, aa.* from (select * from BOARD order by B_ID desc) aa) 
+			  where rnum>#{startRow} and rnum<=#{endRow}
+			]]>
+	</select>
+	<select resultType="long" id="selectCount">select count(*) from BOARD </select>
+</mapper>

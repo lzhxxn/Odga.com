@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css?family=Amaranth|Quicksand");
+/* Coolors Exported Palette - coolors.co/efeeda-c5f4e0-c2eaba-a7c4a0-8f8389 */
+/* HSL */
+/* RGB */
+html, body {
+  color: #4d4d4d;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h2 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h3 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h4 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h5 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h6 {
+  font-family: "Quicksand", sans-serif;
+}
+
+.container1 {
+  /* padding: 100px; */
+  padding: 3%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.btn {
+  transition: all 0.3s ease-in-out;
+  font-family: "Quicksand", sans-serif;
+  background-color: #efeeda;
+  color: #4d4d4d;
+  border: 1px solid #4d4d4d;
+  padding: 12.5px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #4d4d4d;
+  color: #efeeda;
+}
+.btn:focus {
+  outline: none;
+}
+.btn:active {
+  transition: all 0.1s ease-in-out;
+  background-color: #efeeda;
+  color: #4d4d4d;
+}
+
+.image-viewer {
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.image-viewer .main-image {
+  /* width: 550px; */
+  /* height: 300px; */
+  align-self: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-viewer .main-image img {
+  cursor: zoom-in;
+  max-width: 150%;
+  max-height: 150%;
+  width: auto;
+  height: auto;
+}
+.image-viewer .secondary-images {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.image-viewer .secondary-images .secondary-image {
+  padding: 6.25px;
+  height: 50px;
+}
+.image-viewer .secondary-images .secondary-image img {
+  cursor: pointer;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.section, .detail, .pricing {
+    /* padding: 46.6px; */
+    padding-top: 2.5%;
+}
+
+.pricing {
+  width: 15%;
+  padding: 12.5px;
+}
+.pricing-price {
+  text-align: right;
+  margin: 12.5px 0;
+  font-size: 3em;
+}
+.pricing-btn {
+  width: 100%;
+}
+
+.detail {
+  width: 30%;
+}
+.detail .detail-short-description {
+  margin-top: 2em;
+}
+.detail .detail-long-description {
+  margin-top: 3em;
+  font-size: 0.8rem;
+}
+
+.lightbox {
+  transition: all 0.5s 0s ease-in-out;
+  position: fixed;
+  top: -100%;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(208, 205, 147, 0.9);
+  z-index: 501;
+  opacity: 0;
+}
+.lightbox img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 0%;
+  max-height: 0%;
+}
+.lightbox .lightbox-controls {
+  position: relative;
+  height: 100vh;
+}
+.lightbox .lightbox-controls .lightbox-control, .lightbox.show .lightbox-controls .lightbox-controls-next, .lightbox.show .lightbox-controls .lightbox-controls-previous, .lightbox .lightbox-controls .lightbox-controls-next, .lightbox .lightbox-controls .lightbox-controls-previous, .lightbox .lightbox-controls .lightbox-controls-close {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  z-index: 502;
+  background: rgba(177, 172, 76, 0.9);
+  color: white;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.lightbox .lightbox-controls .lightbox-controls-close {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+.lightbox .lightbox-controls .lightbox-controls-previous {
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  transition: all 0.5s 0s ease-in-out;
+}
+.lightbox .lightbox-controls .lightbox-controls-next {
+  position: absolute;
+  top: 50%;
+  right: -20%;
+  transition: all 0.5s 0s ease-in-out;
+}
+
+.lightbox.show {
+  transition: all 0.5s 0s ease-in-out;
+  top: 0%;
+  bottom: 0%;
+  opacity: 1;
+}
+.lightbox.show img {
+  transition: all 0.5s 0.5s ease-in-out;
+  max-width: 100%;
+  max-height: 100%;
+}
+.lightbox.show .lightbox-controls .lightbox-controls-previous {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transition: all 0.5s 0.75s ease-in-out;
+}
+.lightbox.show .lightbox-controls .lightbox-controls-next {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transition: all 0.5s 0.75s ease-in-out;
+}
