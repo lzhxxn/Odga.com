@@ -35,3 +35,17 @@
 ![MVC](https://user-images.githubusercontent.com/75344302/112784452-be739880-908c-11eb-8bed-18452e6ffdfb.png)
 <br>
 &nbsp;시스템 설계는 기본적으로 Spring Framework를 통해 **MVC**를 기반으로 설계했다. 확실히 이번에 Spring MVC를 사용하면서 전보다 유지보수하기가 굉장히 편안함을 느꼈다.😌<br>
+
+# Results
+## 🚙 결과물
+### *메인페이지*
+### *국내여행지*
+![국내여행지](https://user-images.githubusercontent.com/75344302/112784524-e2cf7500-908c-11eb-9018-8a865a86ce4c.gif)
+### *나만의플래너*
+![플래너](https://user-images.githubusercontent.com/75344302/112784523-e236de80-908c-11eb-8b13-d6ec842ed73c.gif)
+### *로그인*
+![로그인](https://user-images.githubusercontent.com/75344302/112784525-e2cf7500-908c-11eb-9c78-f3afad4853fc.gif)
+### *여행리뷰*
+![여행리뷰](https://user-images.githubusercontent.com/75344302/112784519-e06d1b00-908c-11eb-8ea3-4914fca43811.gif)
+### *마이페이지*
+### *관리자페이지*
