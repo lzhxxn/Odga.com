@@ -36,8 +36,8 @@
 <br>
 &nbsp;시스템 설계는 기본적으로 Spring Framework를 통해 **MVC**를 기반으로 설계했다. 확실히 이번에 Spring MVC를 사용하면서 전보다 유지보수하기가 굉장히 편안함을 느꼈다.😌<br>
 
-# Results
-## 🚙 결과물
+# 🚙 Results
+## 결과물
 ### *메인페이지*
 ### *국내여행지*
 ![국내여행지](https://user-images.githubusercontent.com/75344302/112784524-e2cf7500-908c-11eb-9018-8a865a86ce4c.gif)
