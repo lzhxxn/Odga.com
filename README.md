@@ -24,10 +24,7 @@
 
 
 ## 🚙 기술스택
-- Spring MVC (Spring Tools 5.0.7.RELEASE)
-- Tomcat ver 9
-- Oracle 11g
-- Oracle sql developer
+![Stack](https://user-images.githubusercontent.com/75344302/112785046-0f37c100-908e-11eb-8f10-249dd5a9a63d.png)
 
 
 ## 🚙 개발기간
