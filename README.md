@@ -35,5 +35,6 @@
 
 ## 🚙 시스템설계
 ### *MVC Design Pattern*
+![MVC](https://user-images.githubusercontent.com/75344302/112784452-be739880-908c-11eb-8bed-18452e6ffdfb.png)
 
 
