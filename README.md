@@ -38,8 +38,6 @@
 
 # 🚙 Results
 ## 결과물
-### *로그인*
-![로그인](https://user-images.githubusercontent.com/75344302/112784525-e2cf7500-908c-11eb-9c78-f3afad4853fc.gif)
 ### *메인페이지*
 ![인덱스](https://user-images.githubusercontent.com/75344302/112800845-2638dc00-90ab-11eb-972b-b22d7d4bf199.gif)
 ### *국내여행지*
@@ -52,6 +50,8 @@
 ![관리자페이지](https://user-images.githubusercontent.com/75344302/112800806-19b48380-90ab-11eb-8996-aae54597a422.gif)
 ### *마이페이지*
 ![마이페이지](https://user-images.githubusercontent.com/75344302/112800827-20db9180-90ab-11eb-9baa-1e5b37f07534.gif)
+### *로그인*
+![로그인](https://user-images.githubusercontent.com/75344302/112784525-e2cf7500-908c-11eb-9c78-f3afad4853fc.gif)
 ### *세션만료알림창*
 ![세션만료](https://user-images.githubusercontent.com/75344302/112800834-233deb80-90ab-11eb-8430-ffa14047f990.gif)<br>
-세션만료, 수정, 삭제 등 필요함에 따라 SweetAlert를 적용하였습니다. 
+_세션만료, 수정, 삭제 등 필요함에 따라 SweetAlert를 적용하였습니다. 
