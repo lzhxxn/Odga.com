@@ -30,40 +30,7 @@
 			<link rel="stylesheet" href="assets/css/planner.css">
 		</head>
 <style>
-.swal-button--확인:not([disabled]):hover {
-    background-color: #ff5235;
-}
-.swal-button--확인{
-	background-color: #ff3d1c;
-}
-.swal-button--확인:hover{
-	background-color: #ff5235;
-}
-.swal-button--확인:active {
- background-color:#ff5235
-}
-.swal-button--확인하기:not([disabled]):hover {
-    background-color: #ff5235;
-}
-.swal-button--확인하기{
-	background-color: #ff3d1c;
-}
-.swal-button--확인하기:hover{
-	background-color: #ff5235;
-}
-.swal-button--홈으로 {
- color:#555;
- background-color:#efefef
-}
-.swal-button--홈으로:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--홈으로:active {
- background-color:#d7d7d7
-}
-.swal-button--홈으로:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
+.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}.swal-button--확인하기:not([disabled]):hover{background-color:#ff5235}.swal-button--확인하기{background-color:#ff3d1c}.swal-button--확인하기:hover{background-color:#ff5235}.swal-button--홈으로{color:#555;background-color:#efefef}.swal-button--홈으로:not([disabled]):hover{background-color:#e8e8e8}.swal-button--홈으로:active{background-color:#d7d7d7}.swal-button--홈으로:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}
 </style>
 		<body>
 			<!-- Preloader Start -->
@@ -129,11 +96,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -302,7 +269,7 @@
 							<div class="category-listing mb-50">
 								<div class="single-listing">									
 									<div class="select-job-items2">
-										<div class="card" id="card2" style="min-height: 460px;">
+										<div class="card" name="card2"id="card2" style="min-height: 460px;">
 											
 										</div>
 									</div>
@@ -410,12 +377,13 @@
 			                                 </c:when>
 			                                 <c:otherwise>
 			                                    <li><a href="logout.do">로그아웃</a></li>
+			                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
 			                                 </c:otherwise>
 			                            </c:choose>
 										<li><a href="listing.do">국내여행지</a></li>
 										<li><a href="use.do">이용방법</a>
-										<li><a href="review.do">여행후기</a></li>
-										<li><a onclick="goSupport()" style ="cursor: pointer;">문의하기</a></li>
+										<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+										<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -502,10 +470,6 @@
                      data: { searchOption: searchOption, keyword : keyword, areacode : areaindex, 
                            sigungucode: sigunguIndex },
                      success: function(responseData){
-                      /*  if(!responseData){
-                          alert("검색 결과가 없습니다.");
-                          return false;
-                       } */
                        var html = "";
                      var html1 = "";
                      var list = responseData.lists;
@@ -534,7 +498,6 @@
        	              }       
        	           }
        	                $("#result").html(html1);
-       	           /* $("#card").html(html); */
        	             $("#data-panel").html(html);
                      }
                   });
@@ -548,11 +511,19 @@
 <script type="text/javascript">
 function savePlanner(){
 	checkUnload = false;
-	
-	var p_title = $("#p_title").val(); 
+	var sp = document.getElementById('card2').innerText;
+	var p_title = $("#p_title").val();
+	if(p_title == null || p_title==""){
+		sweetAlert("여행 플래너의 제목을 입력해주세요.");
+		$("#p_title").focus();
+		return false;
+	}
+	else if(sp==null||sp=="장소를 추가해주세요"||sp==""){
+		sweetAlert("여행 플래너에 장소를 추가해주세요.");
+		return false;
+	}else{
 	var p_msize = $("#test1 option:selected").val();
 	var p_concept = $("#test2 option:selected").val();
-	
 	var title = $("#title").val(); 
 	var hsize = $("#hSize").val();
 	var concept = $("#concept").val();
@@ -572,56 +543,57 @@ function savePlanner(){
 				document.fin.submit();
 			}
 		});
+	}
 }
 </script>
 
 <script type="text/javascript">
 
 function changes(fr) {
-	var li = new Array();
-	var li2 = new Array();
-	var num = new Array();
-	var vnum = new Array();
-	var latitude = 0;
-	var longitude = 0;
-	var k = 0;
+   var li = new Array();
+   var li2 = new Array();
+   var num = new Array();
+   var vnum = new Array();
+   var latitude = 0;
+   var longitude = 0;
+   var k = 0;
 
-	<c:set var="list" value="${list}"/>
-	<c:forEach items="${list.list}" var="area">
+   <c:set var="list" value="${list}"/>
+   <c:forEach items="${list.list}" var="area">
     if(fr==${area.areacode}) {
-    	li.push("세부 지역");
-    	li2.push("");
-    	<c:forEach items="${list.list_s}" var="sigungu">
-    		if(${area.areacode}==${sigungu.areacode}){
-	    		li.push("${sigungu.si_name}");
-	    		li2.push("${sigungu.sigungucode}");
-    		}
-    	</c:forEach>
-		num = li;
-		vnum = li2;
+       li.push("세부 지역");
+       li2.push("");
+       <c:forEach items="${list.list_s}" var="sigungu">
+          if(${area.areacode}==${sigungu.areacode}){
+             li.push("${sigungu.si_name}");
+             li2.push("${sigungu.sigungucode}");
+          }
+       </c:forEach>
+      num = li;
+      vnum = li2;
 
-		latitude=${area.latitude};
-		longitude=${area.longitude};		
+      latitude=${area.latitude};
+      longitude=${area.longitude};      
     }else if(fr==""){
-    	if(k=0){
-	    	li.push("세부 지역");
-	    	li2.push("");
-	    	k++;
-	    	num = li;
-			vnum = li2;
-    	}
-    	latitude=37.56682;
-		longitude=126.97865;  	
+       if(k=0){
+          li.push("세부 지역");
+          li2.push("");
+          k++;
+          num = li;
+         vnum = li2;
+       }
+       latitude=37.56682;
+      longitude=126.97865;     
     }
     </c:forEach>
   // 셀렉트안의 리스트를 기본값으로 한다..
-	$('#sigungu').empty();
-	  //포문을 이용하여 두번째(test2)셀렉트 박스에 값을 뿌려줍니당)
-	for(var i=0; i<num.length;i++) {
-	  document.form.sigungu.options[i] = new Option(num[i],vnum[i]);
-	}
-	
-	// 이동할 위도 경도 위치를 생성합니다 
+   $('#sigunguCode').empty();
+     //포문을 이용하여 두번째(test2)셀렉트 박스에 값을 뿌려줍니당)
+   for(var i=0; i<num.length;i++) {
+     document.form.sigungu.options[i] = new Option(num[i],vnum[i]);
+   }
+   
+   // 이동할 위도 경도 위치를 생성합니다 
     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
     
     // 지도 중심을 이동 시킵니다
@@ -647,7 +619,7 @@ function daydo(value){
            if(responseData.length != 0){
         	   for(var i=0; i<responseData.length; i++){
 					  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-				  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+				  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 					  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 				  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 					  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -971,7 +943,7 @@ function checkNull(){
 	            if(responseData.length != 0){
 	            	for(var i=0; i<responseData.length; i++){
 						  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 						  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 					  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 						  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -1003,7 +975,7 @@ function checkNull(){
 	            if(responseData.length != 0){
 	            	for(var i=0; i<responseData.length; i++){
 						  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 						  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 					  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 						  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -1024,6 +996,8 @@ function checkNull(){
 <script type="text/javascript">
 //초기화버튼
 function reset(){
+	sdate=null;
+	edate=null;
 	document.getElementById("p_title").value = null;
 	document.getElementById("sdate").value = null;
 	document.getElementById("edate").value = null;
@@ -1035,6 +1009,8 @@ function reset(){
 	$('#card2').empty(); 
 	$('#card').empty();
 	dayDelete();
+	dayReset();
+	dayDelAll();
 }
 </script>
 
@@ -1069,21 +1045,23 @@ function goSupport(){
 	}
 }
 function logout(){
-	  swal({
-			text: "로그아웃 하시겠습니까 ?",
-			buttons:{"확인":true,cancel:"취소"},
-			}).then((value) => {
-				if(value){
-					 swal({
-							text: "로그아웃 되었습니다.",
-							buttons:{"확인":true},
-							}).then((value) => {
-								if(value){
-									location.href="logout.do";
-								}
-							});				
-				}
-			});  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
 }
 function sweetAlert(text){
 	swal({

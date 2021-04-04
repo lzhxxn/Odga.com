@@ -22,9 +22,7 @@ public class Member {
 	private int m_verify;
 	private String m_about;
 	private int count;
-	//ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°
-	private String Authkey;
-	
+	private String Authkey; //ÀÌ¸ŞÀÏ ÀÎÁõÅ°
 	public Member(String m_email, String m_pwd) {
 	      super();
 	      this.m_email = m_email;

@@ -153,7 +153,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public String saveStore(MultipartFile file) {
 		String ofname = file.getOriginalFilename();
-		System.out.println("#ofname: " + ofname);
 		int idx = ofname.lastIndexOf(".");
 		String ofheader = ofname.substring(0, idx);
 		String ext = ofname.substring(idx);
@@ -164,31 +163,24 @@ public class ReviewServiceImpl implements ReviewService {
 		sb.append(ms);
 		sb.append(ext);
 		String name = sb.toString();
-		
-		long fsize = file.getSize();
-		log.info("#ofname: " + ofname + ", name: " + name + ", fsize: "+fsize);
-		
 		boolean flag = writeFile(file, name);
 		if(flag) {
-			log.info("#############################���ε� ����#############################");
+			log.info("# ReviewServiceImpl : 썸네일 업로드 성공");
 		}else {
-			log.info("#############################���ε� ����#############################");
+			log.info("# ReviewServiceImpl : 썸네일 업로드 실패");
 		}
 		return name;
 	}
-
 	@Override
 	public boolean writeFile(MultipartFile file, String name) {
 		File rDir = new File(Path.FILE_REVIEW);
 		if(!rDir.exists()) rDir.mkdirs();
-		
 		FileOutputStream fos = null;
 		try {
 			byte data[] = file.getBytes();
 			fos = new FileOutputStream(Path.FILE_REVIEW+name);
 			fos.write(data);
 			fos.flush();
-			
 			return true;
 		}catch(IOException ie) {
 			return false;
@@ -198,13 +190,11 @@ public class ReviewServiceImpl implements ReviewService {
 			}catch(IOException ie) {}
 		}
 	}
-
 	@Override
 	public ReviewListResult getReviewListResult(int cp, int ps, int rangeSize) {
 		long totalCount = reviewMapper.selectCount();
 		ReviewVo reviewVo = new ReviewVo(null, null, cp, ps);
 		List<Review> list = reviewMapper.selectPerPage(reviewVo);
-		
 		return new ReviewListResult(cp, totalCount, ps, list, rangeSize);
 	}
 }

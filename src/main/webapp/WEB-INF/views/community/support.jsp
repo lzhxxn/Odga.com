@@ -30,37 +30,7 @@
             <link rel="stylesheet" href="assets/css/test.css">
    </head>
 <style>
-.swal-button--확인하기:not([disabled]):hover {
-    background-color: #ff5235;
-}
-.swal-button--확인하기{
-	background-color: #ff3d1c;
-}
-.swal-button--확인하기:hover{
-	background-color: #ff5235;
-}
-.swal-button--홈으로 {
- color:#555;
- background-color:#efefef
-}
-.swal-button--홈으로:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--홈으로:active {
- background-color:#d7d7d7
-}
-.swal-button--홈으로:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
-.swal-button--확인 {
- background-color:#ff3d1c
-}
-.swal-button--확인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--확인:active {
- background-color:#ff5235
-}
+.swal-button--확인하기:not([disabled]):hover{background-color:#ff5235}.swal-button--확인하기{background-color:#ff3d1c}.swal-button--확인하기:hover{background-color:#ff5235}.swal-button--홈으로{color:#555;background-color:#efefef}.swal-button--홈으로:not([disabled]):hover{background-color:#e8e8e8}.swal-button--홈으로:active{background-color:#d7d7d7}.swal-button--홈으로:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}
 </style>
    <body>
     <!-- Preloader Start -->
@@ -126,11 +96,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -162,7 +132,7 @@
     <main>
 
         <!-- Hero Start-->
-        <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+         <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center" style="background-image: url(assets/img/myPlanImg/12.jpg);">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -201,7 +171,7 @@
                     <div class="col-lg-8">
                         <h3 class="mb-40">문의사항 보내기</h3>
                         <!-- Form -->
-                        <form name="supportFrm"id="supportFrm" class="form-contact contact_form mb-80" action="support.do" method="post">
+                        <form name="supportFrm" id="supportFrm" class="form-contact contact_form mb-80" action="support.do" method="post">
                             <div class="row">
                             	 <div class="col-sm-7">
                                     <div class="form-group">
@@ -211,12 +181,12 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="form-group">
-                                        <input class="form-control error" name="s_subject" placeholder = '제목 입력'>
+                                        <input class="form-control error" name="s_subject" id="s_subject" placeholder='제목 입력'>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="s_content" id="message" cols="30" rows="9" placeholder = '문의내용 입력'" placeholder="문의내용 입력"></textarea>
+                                        <textarea class="form-control w-100 error" name="s_content" id="message" cols="30" rows="9" placeholder = '문의내용 입력' placeholder="문의내용 입력"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +206,7 @@
 
     </main>
    		<!-- Footer Start-->
-		footer>
+		<footer>
 		<div class="footer-area">
 			<div class="container">
 				<div class="footer-top footer-padding">
@@ -276,12 +246,13 @@
 			                                 </c:when>
 			                                 <c:otherwise>
 			                                    <li><a href="logout.do">로그아웃</a></li>
+			                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
 			                                 </c:otherwise>
 			                            </c:choose>
 										<li><a href="listing.do">국내여행지</a></li>
-										<li><a onclick="goPlanner()">나의 여행 만들기</a></li>
-										<li><a href="review.do">여행후기</a></li>
-										<li><a onclick="goSupport()" style ="cursor: pointer;">문의하기</a></li>
+										<li><a href="use.do">이용방법</a>
+										<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+										<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -371,35 +342,48 @@ function goMypage(){
 	}
 }
 function logout(){
-	  swal({
-			text: "로그아웃 하시겠습니까 ?",
-			buttons:{"확인":true,cancel:"취소"},
-			}).then((value) => {
-				if(value){
-					 swal({
-							text: "로그아웃 되었습니다.",
-							buttons:{"확인":true},
-							}).then((value) => {
-								if(value){
-									location.href="logout.do";
-								}
-							});				
-				}
-			});  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
 }
 document.getElementById('submitBtn').onclick = function(){	
-	swal({
-		text: "문의사항이 성공적으로 접수 되었습니다.",
-		buttons:{"확인하기":"확인하기","홈으로":"홈으로"},
-		}).then((value) => {
-			if(value=="확인하기"){
-				document.supportFrm.goPage.value="mypage";
-				document.supportFrm.submit();
-			}else if(value=="홈으로"){
-				document.supportFrm.goPage.value="index";
-				document.supportFrm.submit();
-			}
-		});
+	if(document.supportFrm.s_subject.value != "" && document.supportFrm.message.value != ""){
+		swal({
+			text: "문의사항이 성공적으로 접수 되었습니다.",
+			buttons:{"확인하기":"확인하기","홈으로":"홈으로"},
+			}).then((value) => {
+				if(value=="확인하기"){
+					document.supportFrm.goPage.value="mypage";
+					document.supportFrm.submit();
+				}else if(value=="홈으로"){
+					document.supportFrm.goPage.value="index";
+					document.supportFrm.submit();
+				}
+			});
+	}else{
+		swal({
+			text: "모든 항목을 작성해주세요.",
+			buttons:{"확인하기":"확인하기"},
+			}).then((value) => {
+				if(value=="확인하기"){
+					return;
+				}
+			});
+	}
 }
 </script>
 

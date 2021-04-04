@@ -13,7 +13,7 @@
 	
 	<insert id="insert" parameterType="Review"> 
 		insert into BOARD values(BOARD_ID.nextval, #{b_writer}, #{b_subject}, #{b_content}, #{b_img}, SYSDATE, #{b_catgo}, 0, #{m_id},0)
- 	</insert><!--#{b_like}#{m_id}#{a_id}-->
+ 	</insert>
  		
 	<!-- 문의하기 작성 -->
  	<insert id="insertS" parameterType="Support">
@@ -77,7 +77,7 @@
 		
 	<!-- 댓글 -->
 	<select id="listReply" resultType="Reply" parameterType="long">
-		select * from REPLY where b_id=#{b_id} order by RE_ID desc
+		select * from REPLY where b_id=#{b_id} order by RE_ID
 	</select>
 	<select id="countReply" resultType="int" parameterType="long">
 		select count(*) from REPLY where b_id=#{b_id}

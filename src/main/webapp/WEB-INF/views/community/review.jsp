@@ -5,15 +5,7 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <style>
-.swal-button--확인 {
- background-color:#ff3d1c
-}
-.swal-button--확인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--확인:active {
- background-color:#ff5235
-}
+.swal-button--확인 {background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover {background-color:#ff5235}.swal-button--확인:active {background-color:#ff5235}
 </style>
 <head>
     <meta charset="utf-8">
@@ -107,11 +99,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -175,12 +167,11 @@
 	                                                onfocus="this.placeholder = ''"
 	                                                onblur="this.placeholder = '검색어를 입력하세요..'">
 	                                            <div class="input-group-append">
-	                                                <button class="btns" id="searchOk1" type="button"><i class="ti-search"></i></button>
+	                                                <button class="btns" style="cursor: inherit;" disabled><i class="ti-search"></i></button>
 	                                            </div>
 	                                        </div>
 	                                    </div>
-	                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-	                                        type="submit">검 색</button>
+	                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" id="srchbtn">검 색</button>
 	                                </form>
                                 </div>
                             </aside>
@@ -238,7 +229,7 @@
                                      </a>
 	                                 </div>
 	                                  <div class="media-body" style="width: 79%;">
-	                                    <a id="review" onclick="goReviewDetail(${recently.b_id})" style ="cursor: pointer;">
+	                                    <a id="review" onclick="goReviewDetail(${recently.b_id})" style ="cursor:pointer;">
 	                                       <h3 style="text-overflow: ellipsis;overflow: hidden;box-sizing: border-box;width: 100%;white-space: nowrap;">${recently.b_subject}</h3>
 	                                    </a>
                                     <p>${recently.b_rdate}</p>
@@ -317,132 +308,151 @@
 									 <div class="blog_details"><h2>${reviewCatgo.count}개의 후기가 있습니다.</h2></div>									   
 									<c:forEach items="${reviewCatgo.list}" var="cat">
 			                            <article class="blog_item">
-			                            <a onclick="goReviewDetail(${cat.b_id})" style ="cursor: pointer;">
-			                                <div class="blog_item_img">
-			                                    <img class="card-img rounded-0" src="resources/upload/${cat.b_img}" style="max-height:500px;width:100%;" alt="">
-			                                    <a class="blog_item_date">
-			                                        <h3>${cat.b_rdate}</h3>
-			                                    </a>
-			                                </div>			
-			                                <div class="blog_details">
-			                                    <a class="d-inline-block" onclick="goReviewDetail(${cat.b_id})" style ="cursor: pointer;">
-			                                        <h2>${cat.b_subject}</h2>
-			                                    </a>
-			                                    <p>${cat.b_catgo}</p>
-			                                    <ul class="blog-info-link">
-			                                        <li><i class="fa fa-user"></i> ${cat.b_writer}</li>
-		                                        	<li><i class="fa fa-comments"></i> ${review.b_reply}개</li>
-			                                        <li><i class="fa fa-heart"></i> ${cat.b_like}개</li>
-			                                    </ul>
-			                                </div>
+				                            <a onclick="goReviewDetail(${cat.b_id})" style="cursor:pointer;">
+				                                <div class="blog_item_img">
+				                                    <img class="card-img rounded-0" src="resources/upload/${cat.b_img}" style="max-height:500px;width:100%;" alt="">
+				                                    <a class="blog_item_date">
+				                                        <h3>${cat.b_rdate}</h3>
+				                                    </a>
+				                                </div>			
+				                                <div class="blog_details">
+				                                    <a class="d-inline-block" onclick="goReviewDetail(${cat.b_id})" style ="cursor: pointer;">
+				                                        <h2>${cat.b_subject}</h2>
+				                                    </a>
+				                                    <p>${cat.b_catgo}</p>
+				                                    <ul class="blog-info-link">
+				                                        <li><i class="fa fa-user"></i> ${cat.b_writer}</li>
+			                                        	<li><i class="fa fa-comments"></i> ${review.b_reply}개</li>
+				                                        <li><i class="fa fa-heart"></i> ${cat.b_like}개</li>
+				                                    </ul>
+				                                </div>
 			                                </a>
 			                            </article>
 									</c:forEach>
 								</c:when>
 							</c:choose>
-    <!--Pagination Start  -->
-                     <div class="pagination-area pt-70 text-center">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-xl-12">
-                                     <div class="single-wrap d-flex justify-content-center">
-                                         <nav aria-label="Page navigation example">
-                                             <ul class="pagination justify-content-start">
-                                             
-                                     <!-- 이전 페이지 START-->
-                                    <c:choose>
-                                     <c:when test="${reviewSearch.keyword != null}">
-                                       <c:choose>
-                                              <c:when test="${reviewlistResult.cp eq 1}">
-                                                <li class="page-item disabled" style="display:none">
-                                                 <a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.prevPage}&keyword=${keyword}&catgo=${catgo}"><span class="ti-angle-left" style="display:none"></span></a>
-                                                 </li>
-                                              </c:when>
-                                             <c:otherwise>
-                                           <li class="page-item" style="display:none">
-                                           <a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.prevPage}&keyword=${keyword}&catgo=${catgo}"><span class="ti-angle-left" style="display:none"></span></a>
-                                           </li>
-                                        </c:otherwise>
-                                        </c:choose>
-                                     </c:when>
-                                  <c:otherwise>
-                                        <c:choose>
-                                              <c:when test="${reviewlistResult.cp eq 1}">
-                                                <li class="page-item disabled">
-                                                 <a class="page-link" href="review.do?cp=${reviewlistResult.prevPage}"><span class="ti-angle-left"></span></a>
-                                                 </li>
-                                              </c:when>
-                                             <c:otherwise>
-                                           <li class="page-item">
-                                           <a class="page-link" href="review.do?cp=${reviewlistResult.prevPage}"><span class="ti-angle-left"></span></a>
-                                           </li>
-                                        </c:otherwise>
-                                        </c:choose>
-                                  </c:otherwise>
-                                  </c:choose>
-                                    <!-- 이전 페이지 END -->       
-                                           
-                                  <c:choose>
-                                     <c:when test="${reviewSearch.keyword != null}">
-                                              <c:forEach begin="${reviewlistResult.cp}" end="${reviewlistResult.ps}" var="i">
-                                                 <li class="page-item active" style="display:none"><a class="page-link" style="display:none" href="review.do?cp=${i}&keyword=${keyword}&searchOption=${searchOption}">
-                                                  <c:choose>
-                                              <c:when test="${i==reviewlistResult.cp}">
-                                                 <span style="color:red;font-weight:bold; display:none">${i}</span>
-                                              </c:when>
-                                              <c:otherwise>
-                                                  ${i}
-                                              </c:otherwise>
-                                          </c:choose>            
-                                                </a>
-                                                </li>
-                                              </c:forEach>
-                                        </c:when>
-                                    <c:otherwise>
-                                              <c:forEach begin="${reviewlistResult.startPage}" end="${reviewlistResult.endPage}" var="i">
-                                                 <li class="page-item active"><a class="page-link" href="review.do?cp=${i}">
-                                                  <c:choose>
-                                              <c:when test="${i==reviewlistResult.cp}">
-                                                 <span style="color:red;font-weight:bold">${i}</span>
-                                              </c:when>
-                                              <c:otherwise>
-                                                  ${i}
-                                              </c:otherwise>
-                                          </c:choose>            
-                                                </a>
-                                                </li>
-                                              </c:forEach>
-                                     </c:otherwise>
-                                     </c:choose>
-                                             
-                                             <!-- 다음 페이지 START -->
-                                   <c:choose>
-                                           <c:when test="${reviewSearch.keyword != null}">
-                                                   <li class="page-item" style="display:none" ><a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
-                                                   <span class="ti-angle-right" style="display:none"></span></a></li>
-                                                </c:when>
-                                             <c:otherwise>
-                                                 <c:choose>
-                                                    <c:when test="${reviewlistResult.cp eq reviewlistResult.endPage}">
-                                                    <li class="page-item disabled"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
-                                                    <span class="ti-angle-right"></span></a></li>
-                                                    </c:when>
-                                                 <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
-                                                    <span class="ti-angle-right"></span></a></li>
-                                                 </c:otherwise>
-                                                 </c:choose>
-                                             </c:otherwise>
-                                             </c:choose>
-                                  <!-- 다음 페이지 END --> 
-                                             </ul>
-                                         </nav>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>        
-                     <!--Pagination End  -->
+							<!--Pagination Start  -->
+							<div class="pagination-area pt-70 text-center">
+							    <div class="container">
+							        <div class="row">
+							            <div class="col-xl-12">
+							                <div class="single-wrap d-flex justify-content-center">
+							                    <nav aria-label="Page navigation example">
+							                        <ul class="pagination justify-content-start">
+														                        
+														<!-- 이전 페이지 START-->
+														<c:choose>
+															<c:when test="${reviewSearch.keyword != null}">
+																<c:choose>
+																	<c:when test="${reviewlistResult.cp eq 1}">
+																		<li class="page-item disabled" style="display:none">
+																			<a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.prevPage}&keyword=${keyword}&catgo=${catgo}">
+																				<span class="ti-angle-left" style="display:none"></span>
+																			</a>
+																		</li>
+																	</c:when>
+																	<c:otherwise>
+																		<li class="page-item" style="display:none">
+																			<a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.prevPage}&keyword=${keyword}&catgo=${catgo}">
+																				<span class="ti-angle-left" style="display:none"></span>
+																			</a>
+																		</li>
+																	</c:otherwise>
+																</c:choose>
+															</c:when>
+															<c:otherwise>
+																<c:choose>
+																	<c:when test="${reviewlistResult.cp eq 1}">
+																		<li class="page-item disabled">
+																			<a class="page-link" href="review.do?cp=${reviewlistResult.prevPage}">
+																				<span class="ti-angle-left"></span>
+																			</a>
+																		</li>
+																	</c:when>
+																	<c:otherwise>
+																		<li class="page-item">
+																			<a class="page-link" href="review.do?cp=${reviewlistResult.prevPage}">
+																				<span class="ti-angle-left"></span>
+																			</a>
+																		</li>
+																	</c:otherwise>
+																</c:choose>
+															</c:otherwise>
+														</c:choose>
+														<!-- 이전 페이지 END -->       
+														
+														<c:choose>
+															<c:when test="${reviewSearch.keyword != null}">
+																<c:forEach begin="${reviewlistResult.cp}" end="${reviewlistResult.ps}" var="i">
+																	<li class="page-item active" style="display:none">
+																		<a class="page-link" style="display:none" href="review.do?cp=${i}&keyword=${keyword}&searchOption=${searchOption}">
+																			<c:choose>
+																				<c:when test="${i==reviewlistResult.cp}">
+																					<span style="color:red;font-weight:bold; display:none">${i}</span>
+																				</c:when>
+																				<c:otherwise>
+																					${i}
+																				</c:otherwise>
+																			</c:choose>            
+																		</a>
+																	</li>
+																</c:forEach>
+															</c:when>
+															<c:otherwise>
+																<c:forEach begin="${reviewlistResult.startPage}" end="${reviewlistResult.endPage}" var="i">
+																	<li class="page-item active">
+																		<a class="page-link" href="review.do?cp=${i}">
+																			<c:choose>
+																				<c:when test="${i==reviewlistResult.cp}">
+																					<span style="color:red;font-weight:bold">${i}</span>
+																				</c:when>
+																				<c:otherwise>
+																					${i}
+																				</c:otherwise>
+																			</c:choose>            
+																		</a>
+																	</li>
+																</c:forEach>
+															</c:otherwise>
+														</c:choose>
+														
+														<!-- 다음 페이지 START -->
+														<c:choose>
+															<c:when test="${reviewSearch.keyword != null}">
+																<li class="page-item" style="display:none" >
+																	<a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
+																		<span class="ti-angle-right" style="display:none"></span>
+																	</a>
+																</li>
+															</c:when>
+															<c:otherwise>
+																<c:choose>
+																	<c:when test="${reviewlistResult.cp eq reviewlistResult.endPage}">
+																		<li class="page-item disabled">
+																			<a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
+																				<span class="ti-angle-right"></span>
+																			</a>
+																		</li>
+																	</c:when>
+																	<c:otherwise>
+																		<li class="page-item">
+																			<a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
+																				<span class="ti-angle-right"></span>
+																			</a>
+																		</li>
+																	</c:otherwise>
+																</c:choose>
+															</c:otherwise>
+														</c:choose>
+														<!-- 다음 페이지 END --> 
+							                        </ul>
+							                    </nav>
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+							</div>        
+							<!--Pagination End  -->
                         </div>
                     </div>
                 </div>
@@ -489,12 +499,13 @@
 			                                 </c:when>
 			                                 <c:otherwise>
 			                                    <li><a href="logout.do">로그아웃</a></li>
+			                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
 			                                 </c:otherwise>
 			                            </c:choose>
 										<li><a href="listing.do">국내여행지</a></li>
 										<li><a href="use.do">이용방법</a>
-										<li><a onclick="goPlanner()">나의 여행 만들기</a></li>
-										<li><a onclick="goSupport()">문의하기</a></li>
+										<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+										<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -600,21 +611,37 @@ function goReviewDetail(b_id){
 	}
 }
 function logout(){
-	  swal({
-			text: "로그아웃 하시겠습니까 ?",
-			buttons:{"확인":true,cancel:"취소"},
-			}).then((value) => {
-				if(value){
-					 swal({
-							text: "로그아웃 되었습니다.",
-							buttons:{"확인":true},
-							}).then((value) => {
-								if(value){
-									location.href="logout.do";
-								}
-							});				
-				}
-			});  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
+}
+document.getElementById('srchbtn').onclick = function(){
+	if(document.S.keyword.value == ""){
+		swal({
+			text:"검색어를 입력해주세요.",
+			buttons:{"확인":"확인"}
+		}).then((value) => {
+			if(value){
+				return;
+			}
+		});
+	}else{
+		document.S.submit();
+	}
 }
 </script>
 	

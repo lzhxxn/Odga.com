@@ -24,44 +24,12 @@
   <link href="../assets/css/pointColor.css" rel="stylesheet" />
 </head>
 <style>
-.dark-edition .btn.btn-primary {
-    color: #fff;
-    background-color: #d1302e;
-    border-color: #e53f3c;
-    box-shadow: 0 2px 2px 0 rgb(74, 31, 47), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
-}
-.dark-edition .btn.btn-primary:hover {
-    color: #fff;
-	background-color: #e53f3c;
-	border-color: #cd2d2b;
-	box-shadow: 0 2px 2px 0 rgb(74, 31, 47), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
-}
-.swal-button--홈으로 {
- color:#555;
- background-color:#efefef
-}
-.swal-button--홈으로:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--홈으로:active {
- background-color:#d7d7d7
-}
-.swal-button--홈으로:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
-.swal-button--로그인 {
- background-color:#ff3d1c
-}
-.swal-button--로그인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--로그인:active {
- background-color:#ff5235
-}
+.dark-edition .btn.btn-primary{color:#fff;background-color:#d1302e;border-color:#e53f3c;box-shadow:0 2px 2px 0 #4a1f2f,0 3px 1px -2px rgba(145,63,158,0.2),0 1px 5px 0 rgba(145,63,158,0.12)}.dark-edition .btn.btn-primary:hover{color:#fff;background-color:#e53f3c;border-color:#cd2d2b;box-shadow:0 2px 2px 0 #4a1f2f,0 3px 1px -2px rgba(145,63,158,0.2),0 1px 5px 0 rgba(145,63,158,0.12)}.swal-button--홈으로{color:#555;background-color:#efefef}.swal-button--홈으로:not([disabled]):hover{background-color:#e8e8e8}.swal-button--홈으로:active{background-color:#d7d7d7}.swal-button--홈으로:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--로그인{background-color:#ff3d1c}.swal-button--로그인:not([disabled]):hover{background-color:#ff5235}.swal-button--로그인:active{background-color:#ff5235}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}
+.nav-link{cursor: pointer;}
 </style>
 <body class="dark-edition">
   <div class="wrapper ">
-   <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/gallery/1.png">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/gallery/1.png">
        <div class="logo"><a href="index.do" class="simple-text logo-normal">
           <img src="assets/img/logo/logo_b.png" alt="" style="max-width: 170px;">
         </a></div>
@@ -91,6 +59,12 @@
               <p>문의글 리스트</p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" onclick="logout()">
+            <i class="material-icons">power_settings_new</i>             
+              <p style="margin-left: 25%;color: #2ff275;;font-weight: bold;">로그아웃</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -101,12 +75,6 @@
           <div class="navbar-wrapper">
             <a class="navbar-brand" href="javascript:void(0)"><i class="material-icons">person</i>  관리자 정보</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
          </div>
         </nav>  
       <div class="content">
@@ -119,7 +87,7 @@
                   <p class="card-category">당신의 프로필을 완성시켜보세요!</p>
                 </div>
                 <div class="card-body">
-                  <form action="admin_info.do" name="memberF" method="post" enctype="multipart/form-data" style="margin: 50px 150px 0 150px;">
+                  <form action="member.do" name="memberF" method="post" enctype="multipart/form-data" style="margin: 50px 150px 0 150px;">
               	 <div class="avatar-wrapper">
 					<img class="profile-pic" src="assets/img/profile/${LOGINUSER.m_fname}" />
 					<div class="upload-button">
@@ -130,14 +98,14 @@
                     <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label class="bmd-label-floating">닉네임</label>
+                          <label class="bmd-label-floating">이름</label>
                           <input type="text" name="m_name" value="${LOGINUSER.m_name}" class="form-control">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="bmd-label-floating">이메일주소</label>
-                          <input type="text" class="form-control" name="m_email" value="${LOGINUSER.m_email}">
+                          <input type="text" class="form-control" id="email" name="m_email" value="${LOGINUSER.m_email}">
                         </div>
                       </div>
                     </div>
@@ -182,7 +150,7 @@
                         </div>
                       </div>
                     </div>
-                    <button type="button" class="btn btn-primary pull-right" onclick="checkPwd()">수정하기</button>
+                    <button type="button" id="submitBtn" class="btn btn-primary pull-right" >수정하기</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -192,18 +160,22 @@
         </div>
       </div>
       <footer class="footer">
-        <div class="container-fluid">
-          <div class="copyright float-right" id="date">
-            , made with <i class="material-icons">favorite</i> by
-            <a href="index.do" target="_blank">Odge.com</a> Made with
-            <a href="https://github.com/lzhxxn" target="_blank">JH</a>
-			<a href="https://github.com/dragongit94" target="_blank">MY</a>
-			<a href="https://github.com/yumgit23" target="_blank">YM</a>
-			<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
-			<a href="https://github.com/suadeomgit" target="_blank">SH</a>
-          </div>
-        </div>
-      </footer>
+		        <div class="container-fluid">
+		          <nav class="float-left">
+		            <ul>
+		            </ul>
+		          </nav>
+		          <div class="copyright float-right" id="date">
+		            ODGA.com <i class="material-icons">favorite</i>Made by
+		            <a href="" target="_blank"></a> 
+		            <a href="https://github.com/lzhxxn" target="_blank">JH</a>
+		         	<a href="https://github.com/dragongit94" target="_blank">MY</a>
+		        	<a href="https://github.com/yumgit23" target="_blank">YM</a>
+		         	<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
+		         	<a href="https://github.com/suadeomgit" target="_blank">SH</a>
+		          </div>
+		        </div>
+		      </footer>
       <script>
         const x = new Date().getFullYear();
         let date = document.getElementById('date');
@@ -246,20 +218,97 @@
 				});
 			}
 	});
+	function logout(){
+	     swal({
+	         text: "로그아웃 하시겠습니까 ?",
+	         buttons:{"확인":true,cancel:"취소"},
+	         }).then((value) => {
+	            if(value){
+	                swal({
+	                     text: "로그아웃 되었습니다.",
+	                     buttons:{"확인":true},
+	                     }).then((value) => {
+	                        if(value){
+	                           location.href="logout.do";
+	                        }else{
+	                           location.href="logout.do";
+	                        }
+	                     });            
+	            }
+	         });  
+	}
 </script>
  <script>
- function checkPwd() {
-	 var f = document.memberF; 
-     if (f.m_pwd.value == "") {
-         f.m_pwd.focus();
-         return false;
-     }
-     if (f.m_newpwd.value == "") {
-         f.m_newpwd.focus();
-         return false;
-     }
-     f.submit();
- }
+ function salert(text){
+     swal({
+       text: text,
+       buttons:{"확인":true},
+       });
+}
+
+ document.getElementById('submitBtn').onclick = function(){
+	   var l = document.memberF; 
+	   if(l.m_newpwd.value != null){
+		   if (l.m_pwd.value == "") {
+		       salert("기존의 비밀번호를 입력해주세요.");
+		       l.m_pwd.focus();
+		       return false;
+		   }else{
+		      $.ajax({ 
+		        type: "POST",  
+		        url: "pwdValid.jy",  
+		        data: {m_email : $("#email").val(),
+		           m_pwd : $("#m_pwd").val()},
+		        dataType:"json",
+		        success: function(data){
+		             if(data==1){
+		            	 swal({
+		                     text: "수정 사항을 저장하시겠습니까 ?",
+		                     buttons:{"확인":true,cancel:"취소"},
+		                     }).then((value) => {
+		                        if(value){
+		                       	 swal({
+		                                text: "수정 사항이 저장되었습니다.",
+		                                buttons:{"확인":true},
+		                                }).then((value) => {
+		                                   if(value){
+		                                   	document.memberF.submit();
+		                                   }
+		                                }); 
+		                        }
+		                     });                  
+		             }else{
+		                swal({
+		                         text: "기존 비밀번호와 일치하지 않습니다.",
+		                         buttons:{"확인":true},
+		                         }).then((value) => {
+		                            if(value){
+		                               l.m_pwd.focus();
+		                            }
+		                         });     
+		             }                  
+		          }
+		       
+		       });
+		   }
+	 }else{
+	       swal({
+	          text: "수정 사항을 저장하시겠습니까 ?",
+	          buttons:{"확인":true,cancel:"취소"},
+	          }).then((value) => {
+	             if(value){
+	            	 swal({
+	                     text: "수정 사항이 저장되었습니다.",
+	                     buttons:{"확인":true},
+	                     }).then((value) => {
+	                        if(value){
+	                        	document.memberF.submit();
+	                        }
+	                     }); 
+	             }
+	          });                  
+	 }
+	}
  $(document).ready(function() {
 	 	
      var readURL = function(input) {

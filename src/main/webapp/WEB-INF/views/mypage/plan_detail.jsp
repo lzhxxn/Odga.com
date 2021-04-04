@@ -30,69 +30,18 @@
   <link rel="stylesheet" href="assets/css/detail.css" />  
 </head>
 <style>
-.swal-button--확인:not([disabled]):hover {
-    background-color: #ff5235;
-}
-.swal-button--확인{
-	background-color: #ff3d1c;
-}
-.swal-button--확인:hover{
-	background-color: #ff5235;
-}
-.swal-button--삭제:not([disabled]):hover {
-    background-color: #ff5235;
-}
-.swal-button--삭제{
-	background-color: #ff3d1c;
-}
-.swal-button--삭제:hover{
-	background-color: #ff5235;
-}
-.swal-button--cancel {
- color:#555 !important;
- background-color:#efefef
-}
-.swal-button--cancel:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--cancel:active {
- background-color:#d7d7d7
-}
-.swal-button--cancel:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
-.swal-button--홈으로 {
- color:#555;
- background-color:#efefef
-}
-.swal-button--홈으로:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--홈으로:active {
- background-color:#d7d7d7
-}
-.swal-button--홈으로:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
-.swal-button--로그인 {
- background-color:#ff3d1c
-}
-.swal-button--로그인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--로그인:active {
- background-color:#ff5235
-}
+.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:hover{background-color:#ff5235}.swal-button--삭제:not([disabled]):hover{background-color:#ff5235}.swal-button--삭제{background-color:#ff3d1c}.swal-button--삭제:hover{background-color:#ff5235}.swal-button--cancel{color:#555!important;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--홈으로{background-color:#efefef;color:#555!important}.swal-button--홈으로:not([disabled]):hover{background-color:#e8e8e8}.swal-button--홈으로:active{background-color:#d7d7d7 color:#666161}.swal-button--홈으로:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--로그인{background-color:#ff3d1c}.swal-button--로그인:not([disabled]):hover{background-color:#ff5235}.swal-button--로그인:active{background-color:#ff5235}
+.nav-link{cursor:pointer}
 </style>
 <body class="dark-edition">
   <div class="wrapper ">
-   <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/gallery/1.png">
+    <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/gallery/1.png">
       <div class="logo"><a href="index.do" class="simple-text logo-normal">
          <img src="assets/img/logo/logo_b.png" alt="" style="max-width: 170px;">
         </a></div>
- <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper">
         <ul class="nav">
-            	<li class="nav-item  ">
+          <li class="nav-item">
             <a class="nav-link" href="member.do" >
               <i class="material-icons">person</i>
               <p>내 정보</p>
@@ -104,13 +53,13 @@
               <p>나의 플래너</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" name="goReview" onclick="goOthers(name)">
               <i class="material-icons">library_books</i>
               <p>나의 여행후기</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" name="goLike" onclick="goOthers(name)">
               <i class="material-icons">favorite</i>
               <p>나의 좋아요</p>
@@ -122,20 +71,21 @@
               <p>나의 문의내역</p>
             </a>
           </li>
-          <li class="nav-item  ">
+          <li class="nav-item ">
             <a class="nav-link" href="leaveM">
               <i class="material-icons">no_accounts</i>
               <p>회원탈퇴</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="logout">             
-              <p style="margin-left: 22%;color: snow;font-weight: bold;">로그아웃</p>
+            <a class="nav-link" onclick="logout()">
+            <i class="material-icons">power_settings_new</i>        
+              <p style="margin-left: 25%;color: #2ff275;font-weight: bold;">로그아웃</p>
             </a>
           </li>
         </ul>
       </div>
-    </div>
+    </div>    
       <div class="box" style="overflow-y:auto;">
       <c:set value="${planDetail.planer}" var="planer" />
 	  <c:set value="${planDetail.s_planer}" var="s_planer" />
@@ -145,8 +95,8 @@
 				<div class="count mb-35" style="text-align: center; margin-top:20px;">
 					<h1 style="font-size: 350%;">${planer.p_title}</h1>
 					<div class="buttons" style="margin-left:80%;">
-						<button class="fill" onclick="update()">수정</button>
-						<button class="fill" onclick="removeCheck(${planer.p_id},${planer.m_id})">삭제</button>
+						<button class="fill" style="border-radius: 10px;"onclick="update()">수정</button>
+						<button class="fill" style="border-radius: 10px;"onclick="removeCheck(${planer.p_id},${planer.m_id})">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -202,8 +152,13 @@
             </ul>
           </nav>
           <div class="copyright float-right" id="date">
-            copyright <i class="material-icons">favorite</i> by
-            <a href="" target="_blank">ODGA</a>
+            ODGA.com <i class="material-icons">favorite</i>Made by
+		            <a href="" target="_blank"></a> 
+		            <a href="https://github.com/lzhxxn" target="_blank">JH</a>
+		         	<a href="https://github.com/dragongit94" target="_blank">MY</a>
+		        	<a href="https://github.com/yumgit23" target="_blank">YM</a>
+		         	<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
+		         	<a href="https://github.com/suadeomgit" target="_blank">SH</a>
           </div>
         </div>
       </footer>
@@ -262,6 +217,25 @@
 				}
 			}
 		}
+  function logout(){
+	     swal({
+	         text: "로그아웃 하시겠습니까 ?",
+	         buttons:{"확인":true,cancel:"취소"},
+	         }).then((value) => {
+	            if(value){
+	                swal({
+	                     text: "로그아웃 되었습니다.",
+	                     buttons:{"확인":true},
+	                     }).then((value) => {
+	                        if(value){
+	                           location.href="logout.do";
+	                        }else{
+	                           location.href="logout.do";
+	                        }
+	                     });            
+	            }
+	         });  
+	}
   function removeCheck(p_id,m_id){
 	  swal({
 			text: "해당 글을 삭제 하시겠습니까 ?",

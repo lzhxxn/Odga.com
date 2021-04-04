@@ -14,7 +14,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
 		<!-- CSS here -->
             <link rel="stylesheet" href="assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
@@ -30,17 +29,9 @@
             <link rel="stylesheet" href="assets/css/card.css">
             <link rel="stylesheet" href="assets/css/tutorial.css">
    </head>
-   <style>
-	.swal-button--확인 {
-	 background-color:#ff3d1c
-	}
-	.swal-button--확인:not([disabled]):hover {
-	 background-color:#ff5235
-	}
-	.swal-button--확인:active {
-	 background-color:#ff5235
-	}
-   </style>
+<style>
+.swal-button--확인 {background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover {background-color:#ff5235}.swal-button--확인:active {background-color:#ff5235}
+</style>
 <body>
 	<!-- Preloader Start -->
     <div id="preloader-active">
@@ -104,11 +95,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -276,99 +267,106 @@
 		        <!-- Popular Locations End -->
 
     </main>
-    		<!-- Footer Start-->
-		<footer>
-		<div class="footer-area">
-			<div class="container">
-				<div class="footer-top footer-padding">
-					<div class="row justify-content-between">
-						<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-							<div class="single-footer-caption mb-50">
-								<div class="col-xl-2 col-lg-2 col-md-1">
-								<!-- Logo -->
-                                <div class="logo">
-                                  <a href="index.html"><img src="assets/img/logo/logo_b.png" alt="" style="max-width: 170px;"></a>
-                                </div>
+   	<!-- Footer Start-->
+	<footer>
+	<div class="footer-area">
+		<div class="container">
+			<div class="footer-top footer-padding">
+				<div class="row justify-content-between">
+					<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+						<div class="single-footer-caption mb-50">
+							<div class="col-xl-2 col-lg-2 col-md-1">
+							<!-- Logo -->
+                               <div class="logo">
+                                 <a href="index.html"><img src="assets/img/logo/logo_b.png" alt="" style="max-width: 170px;"></a>
                                </div>
-							 </div>
-							</div>
-						<div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Administrator</h4>
-									<ul>
-										<li><a href="https://github.com/dragongit94">이민용</a></li>
-										<li><a href="https://github.com/yumgit23">허유민</a></li>
-										<li><a href="https://github.com/suadeomgit">권성환</a></li>
-										<li><a href="https://github.com/lzhxxn">이지훈</a></li>
-										<li><a href="https://github.com/DobbyisFree1">박종범</a></li>
-									</ul>
-								</div>
-							</div>
+                              </div>
+						 </div>
 						</div>
-						<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Quick Links</h4>
-									<ul>
-										<li><a href="join.do">회원가입</a></li>
-										<li><a href="login.do">로그인</a></li>
-										<li><a href="listing.do">국내여행지</a></li>
-										<li><a onclick="goPlanner()">나의 여행 만들기</a></li>
-										<li><a href="review.do">커뮤니티</a>
-										<li><a onclick="goSupport()" style ="cursor: pointer;">문의하기</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-							<div class="single-footer-caption mb-50">
-								<div class="footer-tittle">
-									<h4>Contact with Us</h4>
-									<ul>
-										<li><span class="la la-home"></span> 서울 마포구 백범로 23 3층</li>
-										<li><span class="la la-headphones"></span>+ 81 02 707 1480</li>
-										<li><span class="la la-envelope-o"></span>odgacom@naver.com</li>
-									</ul>
-								</div>
+					<div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+						<div class="single-footer-caption mb-50">
+							<div class="footer-tittle">
+								<h4>Administrator</h4>
+								<ul>
+									<li><a href="https://github.com/dragongit94">이민용</a></li>
+									<li><a href="https://github.com/yumgit23">허유민</a></li>
+									<li><a href="https://github.com/suadeomgit">권성환</a></li>
+									<li><a href="https://github.com/lzhxxn">이지훈</a></li>
+									<li><a href="https://github.com/DobbyisFree1">박종범</a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="footer-bottom">
-					<div class="row d-flex justify-content-between align-items-center">
-						<div class="col-xl-9 col-lg-8">
-							<div class="footer-copy-right">
-								<p>
-									&copy; Copyright 
-									<script>
-										document
-												.write(new Date().getFullYear());
-									</script>
-									<b>Odga.com</b> Made with
-									<i class="fa fa-heart" aria-hidden="true"></i>
-									<a href="https://github.com/lzhxxn" target="_blank">JH</a>
-									<a href="https://github.com/dragongit94" target="_blank">MY</a>
-									<a href="https://github.com/yumgit23" target="_blank">YM</a>
-									<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
-									<a href="https://github.com/suadeomgit" target="_blank">SH</a>
-									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								</p>
+					<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+						<div class="single-footer-caption mb-50">
+							<div class="footer-tittle">
+								<h4>Quick Links</h4>
+								<ul>
+									<c:choose>
+		                                 <c:when test="${ empty LOGINUSER }">
+		                                    <li><a href="login.do">로그인 & 회원가입</a></li>
+		                                 </c:when>
+		                                 <c:otherwise>
+		                                    <li><a href="logout.do">로그아웃</a></li>
+		                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
+		                                 </c:otherwise>
+		                            </c:choose>
+									<li><a href="listing.do">국내여행지</a></li>
+									<li><a href="use.do">이용방법</a>
+									<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+									<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
+								</ul>
 							</div>
 						</div>
-						<div class="col-xl-3 col-lg-4">
-							<!-- Footer Social -->
-							<div class="footer-social f-right">
-								<a href="https://www.instagram.com/odga__com"><i class="fas fa-globe"></i></a> 
-								<a href="https://www.instagram.com/odga__com"><i class="fab fa-instagram"></i></a>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+						<div class="single-footer-caption mb-50">
+							<div class="footer-tittle">
+								<h4>Contact with Us</h4>
+								<ul>
+									<li><span class="la la-home"></span> 서울 마포구 백범로 23 3층</li>
+									<li><span class="la la-headphones"></span>+ 81 02 707 1480</li>
+									<li><span class="la la-envelope-o"></span>odgacom@naver.com</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="footer-bottom">
+				<div class="row d-flex justify-content-between align-items-center">
+					<div class="col-xl-9 col-lg-8">
+						<div class="footer-copy-right">
+							<p>
+								&copy; Copyright 
+								<script>
+									document
+											.write(new Date().getFullYear());
+								</script>
+								<b>Odga.com</b> Made with
+								<i class="fa fa-heart" aria-hidden="true"></i>
+								<a href="https://github.com/lzhxxn" target="_blank">JH</a>
+								<a href="https://github.com/dragongit94" target="_blank">MY</a>
+								<a href="https://github.com/yumgit23" target="_blank">YM</a>
+								<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
+								<a href="https://github.com/suadeomgit" target="_blank">SH</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</p>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-4">
+						<!-- Footer Social -->
+						<div class="footer-social f-right">
+							<a href="https://www.instagram.com/odga__com"><i class="fas fa-globe"></i></a> 
+							<a href="https://www.instagram.com/odga__com"><i class="fab fa-instagram"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		</footer>
-		<!-- Footer End-->
+	</div>
+	</footer>
+	<!-- Footer End-->
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -401,31 +399,33 @@ function goSupport(){
 	}
 }
 function goMypage(){
-	if(${empty LOGINUSER}){
-		salert();
+	if(${LOGINUSER.m_verify eq 9}){
+		location.href = "dashboard.do?m_id=${LOGINUSER.m_id}";
 	}else{
-		location.href = "member.do";
+		location.href = "member.do?m_id=${LOGINUSER.m_id}";
 	}
 }
 function goListing(){
     location.href = "listing.do";
 }
 function logout(){
-	  swal({
-			text: "로그아웃 하시겠습니까 ?",
-			buttons:{"확인":true,cancel:"취소"},
-			}).then((value) => {
-				if(value){
-					 swal({
-							text: "로그아웃 되었습니다.",
-							buttons:{"확인":true},
-							}).then((value) => {
-								if(value){
-									location.href="logout.do";
-								}
-							});				
-				}
-			});  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
 }
 </script>
     <!-- JS here -->

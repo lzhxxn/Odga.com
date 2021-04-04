@@ -23,18 +23,8 @@
       <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
-.swal-button--확인 {
- background-color:#ff3d1c
-}
-.swal-button--확인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--확인:active {
- background-color:#ff5235
-}
-.form-select .nice-select{
-   padding-left: 18px;
-}   
+.swal-button--확인{background-color:#ff3d1;}.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}
+.form-select .nice-select{padding-left:18px}
 </style>
 <body>
     <!-- Preloader Start -->
@@ -100,11 +90,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                                                                     
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                                                                     
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -273,20 +263,22 @@
                   <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                      <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                           <h4>Quick Links</h4>
-                           <ul>
-                              <c:choose>
-                                          <c:when test="${ empty LOGINUSER }">
-                                             <li><a href="login.do">로그인 & 회원가입</a></li>
-                                          </c:when>
-                                          <c:otherwise>
-                                             <li><a href="logout.do">로그아웃</a></li>
-                                          </c:otherwise>
-                                     </c:choose>
-                              <li><a href="listing.do">국내여행지</a></li>
-                              <li><a onclick="goPlanner()">나의 여행 만들기</a></li>
-                              <li><a onclick="goSupport()">문의하기</a></li>
-                           </ul>
+							<h4>Quick Links</h4>
+							<ul>
+								<c:choose>
+	                                 <c:when test="${ empty LOGINUSER }">
+	                                    <li><a href="login.do">로그인 & 회원가입</a></li>
+	                                 </c:when>
+	                                 <c:otherwise>
+	                                    <li><a href="logout.do">로그아웃</a></li>
+	                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
+	                                 </c:otherwise>
+	                            </c:choose>
+								<li><a href="listing.do">국내여행지</a></li>
+								<li><a href="use.do">이용방법</a>
+								<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+								<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
+							</ul>
                         </div>
                      </div>
                   </div>
@@ -375,21 +367,23 @@ function goMypage(){
    }
 }
 function logout(){
-     swal({
-         text: "로그아웃 하시겠습니까 ?",
-         buttons:{"확인":true,cancel:"취소"},
-         }).then((value) => {
-            if(value){
-                swal({
-                     text: "로그아웃 되었습니다.",
-                     buttons:{"확인":true},
-                     }).then((value) => {
-                        if(value){
-                           location.href="logout.do";
-                        }
-                     });            
-            }
-         });  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
 }
 document.getElementById('submitBtn').onclick = function(){   
    swal({

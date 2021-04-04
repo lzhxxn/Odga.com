@@ -20437,6 +20437,7 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .sidebar .sidebar-background:after,
 .dark-edition .sidebar {
   background: #1f283e;
+  /* opacity: .94; */
 }
 
 .dark-edition .sidebar[data-background-color="black"] .nav li:not(.active) a,

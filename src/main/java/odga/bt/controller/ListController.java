@@ -16,7 +16,8 @@ import odga.bt.vo.ListVo;
 @Controller
 public class ListController {
     @Resource private TouritemsService service;
-
+    
+    //국내여행지 리스트
     @RequestMapping("/listing")
     public ModelAndView listing(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -24,11 +25,9 @@ public class ListController {
         String catgo = request.getParameter("catgo");
         String cpStr = request.getParameter("cp");
         String psStr = request.getParameter("ps");
-
         session.setAttribute("keyword", keyword);
         session.setAttribute("catgo", catgo);
-
-        //(1) cp
+        // cp
         int cp = 1;
         if (cpStr == null) {
             Object cpObj = session.getAttribute("cp");
@@ -40,8 +39,7 @@ public class ListController {
             cp = Integer.parseInt(cpStr);
         }
         session.setAttribute("cp", cp);
-
-        //(2) ps
+        // ps
         int ps = 10;
         if (psStr == null) {
             Object psObj = session.getAttribute("ps");
@@ -51,7 +49,6 @@ public class ListController {
         } else {
             psStr = psStr.trim();
             int psParam = Integer.parseInt(psStr);
-
             Object psObj = session.getAttribute("ps");
             if (psObj != null) {
                 int psSession = (Integer)psObj;
@@ -65,16 +62,12 @@ public class ListController {
                     session.setAttribute("cp", cp);
                 }
             }
-
             ps = psParam;
         }
         session.setAttribute("ps", ps);
 
-        //(3) ModelAndView
-
         ListResult listResult = null;
         ModelAndView mv = null;
-
         if (catgo != null && keyword != null) {
             int rangeSize = 5;
             listResult = service.getTouritemsListResult(catgo, keyword, cp, ps, rangeSize);
@@ -103,13 +96,12 @@ public class ListController {
             }
         return mv;
     }
+    //국내여행지 상세보기
     @RequestMapping("/listing_details")
     public ModelAndView listing_details(HttpServletRequest request) {
         String contentid = request.getParameter("contentid");
-
         Touritems touritems = service.selectByTitleS(contentid);
         ListResult listResult = service.getTouritemsListResult();
-
         ListVo vo = new ListVo();
         vo.setTouritems(touritems);
         vo.setListResult(listResult);

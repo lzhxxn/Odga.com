@@ -5,15 +5,11 @@ import java.util.List;
 import odga.bt.domain.Touritems;
 import odga.bt.vo.TouritemsVo;
 
-
 public interface TouritemsMapper {
-	List<Touritems> selectPerPage(TouritemsVo touritemsVo);
-	List<Touritems> selectByCatgo(TouritemsVo touritemsVo);
-	List<Touritems> selectHotspot(TouritemsVo touritemsVo);
-	
+	List<Touritems> selectPerPage(TouritemsVo touritemsVo); //페이징
+	List<Touritems> selectByCatgo(TouritemsVo touritemsVo); //검색
+	List<Touritems> selectHotspot(TouritemsVo touritemsVo); //근처장소추천
 	long selectCount();
 	long selectCountByCatgo(TouritemsVo touritemsVo);  
-	
-	Touritems selectByTitle(String contentid);
-
+	Touritems selectByTitle(String contentid); //타이틀로 검색
 }

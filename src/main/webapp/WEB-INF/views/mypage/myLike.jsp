@@ -19,31 +19,8 @@
   <link href="../assets/css/pointColor.css" rel="stylesheet" />
 </head>
 <style>
-.swal-button--홈으로 {
- color:#555;
- background-color:#efefef
-}
-.swal-button--홈으로:not([disabled]):hover {
- background-color:#e8e8e8
-}
-.swal-button--홈으로:active {
- background-color:#d7d7d7
-}
-.swal-button--홈으로:focus {
- box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)
-}
-.swal-button--로그인 {
- background-color:#ff3d1c
-}
-.swal-button--로그인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--로그인:active {
- background-color:#ff5235
-}
-.nav-link{
-	cursor: pointer;
-}
+.swal-button--홈으로{color:#555;background-color:#efefef}.swal-button--홈으로:not([disabled]):hover{background-color:#e8e8e8}.swal-button--홈으로:active{background-color:#d7d7d7}.swal-button--홈으로:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--로그인{background-color:#ff3d1c}.swal-button--로그인:not([disabled]):hover{background-color:#ff5235}.swal-button--로그인:active{background-color:#ff5235}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}
+.nav-link{cursor:pointer}
 </style>
 <body class="dark-edition">
   <div class="wrapper ">
@@ -53,7 +30,7 @@
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-		<li class="nav-item  ">
+          <li class="nav-item">
             <a class="nav-link" href="member.do" >
               <i class="material-icons">person</i>
               <p>내 정보</p>
@@ -65,7 +42,7 @@
               <p>나의 플래너</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" name="goReview" onclick="goOthers(name)">
               <i class="material-icons">library_books</i>
               <p>나의 여행후기</p>
@@ -83,15 +60,16 @@
               <p>나의 문의내역</p>
             </a>
           </li>
-          <li class="nav-item  ">
+          <li class="nav-item ">
             <a class="nav-link" href="leaveM">
               <i class="material-icons">no_accounts</i>
               <p>회원탈퇴</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="logout">             
-              <p style="margin-left: 22%;color: snow;font-weight: bold;">로그아웃</p>
+            <a class="nav-link" onclick="logout()">
+            <i class="material-icons">power_settings_new</i>        
+              <p style="margin-left: 25%;color: #2ff275;font-weight: bold;">로그아웃</p>
             </a>
           </li>
         </ul>
@@ -102,14 +80,8 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)"><i class="fa fa-heart"></i> 나의 좋아요</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>        
+            <a class="navbar-brand" href="javascript:void(0)"><i class="material-icons">favorite</i> 나의 좋아요</a>
+          </div>       
         </div>
       </nav>
       <!-- End Navbar -->
@@ -125,39 +97,47 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
-                      <thead class=" text-primary">
-                            <th style="width:10%">
-                               작성자
-                        </th>
-                        <th style="width:50%">
-                             제목
-                        </th>
-                        <th>
-                           카테고리
-                        </th>
-                        <th>
-                             작성일
-                        </th>
-                      </thead>
-                      <tbody>
-                      <c:forEach items="${mylike}" var="like">
-                        <tr>
-                          <td>
-                            ${like.b_writer}
-                          </td>
-                          <td>
-                          <a class="d-inline-block" href="review_details?b_id=${like.b_id}&m_id=${LOGINUSER.m_id}">
-                           ${like.b_subject}
-                           </a>
-                          </td>
-                          <td>
-                            ${like.b_catgo}
-                          </td>
-                          <td class="text-primary">                           
-                            ${like.b_rdate}
-                          </td>
-                        </tr>
-                        </c:forEach>                       
+                     <c:set var="mylike" value="${mylike}"/>
+                      <c:choose>
+                      <c:when test="${not empty mylike}">
+	                      <thead class=" text-primary">
+	                            <th style="width:10%">
+	                               	작성자
+	                        </th>
+	                        <th style="width:50%">
+	                             	제목
+	                        </th>
+	                        <th>
+	                          	 카테고리
+	                        </th>
+	                        <th>
+	                             	작성일
+	                        </th>
+	                      </thead>
+	                      <tbody>
+	                      <c:forEach items="${mylike}" var="like">
+	                        <tr>
+	                          <td>
+	                            ${like.b_writer}
+	                          </td>
+	                          <td>
+	                          <a class="d-inline-block" href="review_details?b_id=${like.b_id}&m_id=${LOGINUSER.m_id}">
+	                           ${like.b_subject}
+	                           </a>
+	                          </td>
+	                          <td>
+	                            ${like.b_catgo}
+	                          </td>
+	                          <td>                           
+	                            ${like.b_rdate}
+	                          </td>
+	                        </tr>
+	                        </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                        	<th>아직 좋아하는 글이 없어요.</th>
+                        </c:otherwise> 
+                        </c:choose>                   
                       </tbody>
                     </table>
                   </div>
@@ -169,13 +149,18 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
+          <nav class="float-left">
+            <ul>
+            </ul>
+          </nav>
           <div class="copyright float-right" id="date">
-            , made with <i class="material-icons">favorite</i> by
-            <a href="index.do" target="_blank">Odge.com</a> Made with</a> <a href="https://github.com/lzhxxn" target="_blank">JH</a>
-	         <a href="https://github.com/dragongit94" target="_blank">MY</a>
-	         <a href="https://github.com/yumgit23" target="_blank">YM</a>
-	         <a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
-	         <a href="https://github.com/suadeomgit" target="_blank">SH</a>
+ 			ODGA.com <i class="material-icons">favorite</i>Made by
+		            <a href="" target="_blank"></a> 
+		            <a href="https://github.com/lzhxxn" target="_blank">JH</a>
+		         	<a href="https://github.com/dragongit94" target="_blank">MY</a>
+		        	<a href="https://github.com/yumgit23" target="_blank">YM</a>
+		         	<a href="https://github.com/DobbyisFree1" target="_blank">JB</a>
+		         	<a href="https://github.com/suadeomgit" target="_blank">SH</a>
           </div>
         </div>
       </footer>
@@ -233,6 +218,25 @@
 				}
 			}
 		}
+  function logout(){
+	     swal({
+	         text: "로그아웃 하시겠습니까 ?",
+	         buttons:{"확인":true,cancel:"취소"},
+	         }).then((value) => {
+	            if(value){
+	                swal({
+	                     text: "로그아웃 되었습니다.",
+	                     buttons:{"확인":true},
+	                     }).then((value) => {
+	                        if(value){
+	                           location.href="logout.do";
+	                        }else{
+	                           location.href="logout.do";
+	                        }
+	                     });            
+	            }
+	         });  
+	}
 </script>
 </body>
 

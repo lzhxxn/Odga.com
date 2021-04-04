@@ -16,7 +16,7 @@ public class TouritemsVo {
 	
 	{                              
 		cp = 1;
-		ps = 5;   // �씠�젃寃� 硫ㅻ쾭蹂��닔瑜� 珥덇린�솕�빐以섎룄 �맂�떎. 
+		ps = 10;   // �씠�젃寃� 硫ㅻ쾭蹂��닔瑜� 珥덇린�솕�빐以섎룄 �맂�떎. 
 	}
 	
 	public int getStartRow() {

@@ -115,12 +115,13 @@
       SELECT p_id FROM (select p_id from planner where m_id=#{m_id} order by p_id desc) where rownum=1
    </select>
 	<!-- 세부플래너 삭제 -->
-	<update id="delete_sPlan" parameterType="long">
+	<delete id="delete_sPlan" parameterType="long">
 		delete from s_planner where p_id = #{p_id}
-	</update>
-	<update id="delete_Plan" parameterType="long">
+	</delete>
+	<!-- 플래너 삭제 -->
+	<delete id="delete_Plan" parameterType="long">
 		delete from planner where p_id = #{p_id}
-	</update>
+	</delete>
 	
 	<select id="getItem"  resultType="Touritems" parameterType="String">
       select * from Touritems where contentid = #{contentid}

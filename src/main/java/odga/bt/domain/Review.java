@@ -14,11 +14,11 @@ public class Review {
 	private String b_writer;	//작성자
 	private String b_subject; 	//글 제목
 	private String b_content; 	//글 내용
-	private String b_img;
+	private String b_img;		//썸네일
 	private Date b_rdate; 		//작성일
 	private String b_catgo;		//카테고리
 	private int b_like; 		//좋아요수
 	private int m_id; 			//회원id
-	private int b_reply;
-	private Like_t likgt;
+	private int b_reply;		//댓글 수
+	private Like_t likgt;		//좋아요수
 }

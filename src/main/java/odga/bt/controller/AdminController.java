@@ -25,10 +25,9 @@ import odga.bt.vo.GenderChart;
 public class AdminController {
 	@Autowired
 	private AdminService service;
-	@Autowired
-	private MemberService mservice;
 	
-	@RequestMapping("dashboard.do")
+	//대시보드
+	@RequestMapping("dashboard.do") 
     public ModelAndView chart() {
 		List<Chart> areaC = service.areaChart();
 		List<Member> memberC = service.memberChart();
@@ -44,81 +43,59 @@ public class AdminController {
 		mv.addObject("bestItem", bestItem);
 		return mv;
     }
-
+	//회원리스트
 	@RequestMapping("/memberList.do")
 	public ModelAndView m_listing() {
 		List<Member> m_list = service.m_listS();
 		ModelAndView mv = new ModelAndView("admin/member_list", "m_list", m_list);
-			
 		return mv;	
 	}
-
+	//관리자 정보수정페이지
    @RequestMapping("/admin_info.do") 
    public String user() {
       return "admin/admin_info"; 
    }
-   @RequestMapping(value = "/admin_info.do", method = RequestMethod.POST)
-   private String updateS(Member member, @RequestParam String m_newpwd, @RequestParam MultipartFile file, HttpSession session, RedirectAttributes rttr) throws Exception {
-		
-	    Member member1 = member;
-		if(file.getSize()!=0) {
-			   member1 = mservice.saveStore(member, file); 
-			   String m_ofname = file.getOriginalFilename(); 
-
-				member1.setM_pwd(m_newpwd);
-				member1.setM_ofname(m_ofname);
-				System.out.println(member.getM_pwd());
-				if(session.getAttribute("LOGINUSER") == null) {
-					return "redirect:login.do";
-				}
-				session.setAttribute("LOGINUSER", mservice.updateS(member1));
-				rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-				return "redirect:admin_info.do"; 
-		}else {
-			member1.setM_pwd(m_newpwd);
-			if(session.getAttribute("LOGINUSER") == null) {
-					return "redirect:login.do";
-			}
-			session.setAttribute("LOGINUSER", mservice.updateS(member1));
-			rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-			return "redirect:admin_info.do";
-		}
-	}
+   //문의글 리스트
    @GetMapping("/support_list.do")
 	public ModelAndView notifications() {
 		List<Support> notifications = service.notificationsS();
 		ModelAndView mv = new ModelAndView("admin/support_list", "notifications", notifications);
 		return mv;
 	}
+   //문의글 상세보기
    @GetMapping("/support_content.do") 
 	public ModelAndView content(long s_id) {
-		System.out.println("#subject: " + s_id);
 		Support support = service.selectByTitle(s_id);
 		ModelAndView mv = new ModelAndView("admin/support_content", "support", support);
 		return mv;
 	}
+   //문의글 답글페이지
   @GetMapping("/reply.do")
 	public String reply(Support support) {
 		int origin_no1 = support.getOrigin_no();
 	    support.setOrigin_no(origin_no1);
-
 		return "admin/support_reply";
 	}
+  //문의글 답글달기
   	@PostMapping("/reply.do")
 	public String support_reply(Support support) {
-	   System.out.println("####");
-	    service.insertreS(support);	
+	    service.insertreS(support);
+	    System.out.println("# "+support.getM_name()+" 관리자 답글 작성 완료");
 		return "redirect:support_list.do";
 	}
+  	//문의글 삭제
 	@GetMapping("support_delete.do")
 	public String delete(@RequestParam long s_id) {
 		service.deleteS(s_id);
+		System.out.println("# "+s_id+"번 답글 삭제 완료");
 		return "redirect:support_list.do";
 	}
+	//회원 강제 탈퇴
 	@GetMapping("delMem.do")
 	public String delMem(@RequestParam String m_email, @RequestParam String m_pwd) {
 		Member mem = new Member(m_email, m_pwd);
 		service.delmemS(mem);
+		System.out.println("# 회원 "+mem.getM_name()+" 삭제 완료");
 		return "redirect:memberList.do";
 	}
 }

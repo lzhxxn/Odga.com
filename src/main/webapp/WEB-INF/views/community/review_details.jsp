@@ -23,25 +23,9 @@
       <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <style>
-.like{
-	color:#dc3545;
-}
-.swal-button:not([disabled]):hover {
-    background-color: #ff3d1c;
-}
-.swal-button--확인 {
- background-color:#ff3d1c
-}
-.swal-button--확인:not([disabled]):hover {
- background-color:#ff5235
-}
-.swal-button--확인:active {
- background-color:#ff5235
-}
-.nice-select{
-	width: 100%;
-	margin-bottom: 2%;
-}
+.like{color:#dc3545}
+.swal-button:not([disabled]):hover{background-color:#ff3d1c}.swal-button--확인{background-color:#ff3d1c}.swal-button--확인:not([disabled]):hover{background-color:#ff5235}.swal-button--확인:active{background-color:#ff5235}
+.nice-select{width:100%;margin-bottom:2%}
 </style>
 <body>
 <!--    Preloader Start-->
@@ -107,11 +91,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -365,10 +349,10 @@
                   </div>
                   <div class="comment-form">
                      <h4>댓글 남기기</h4>
-                     <form class="form-contact comment_form" method="post" action="write_re" id="commentForm">
-                     <input type="hidden" name="m_id" value="${LOGINUSER.m_id}"/>
-                     <input type="hidden" name="b_id" value="${review.b_id}"/>          
-                     <input type="hidden" name="re_fname" value="${LOGINUSER.m_fname}"/>
+                     <form class="form-contact comment_form" method="post" action="write_re" name="commentForm" id="commentForm">
+	                     <input type="hidden" name="m_id" value="${LOGINUSER.m_id}"/>
+	                     <input type="hidden" name="b_id" value="${review.b_id}"/>          
+	                     <input type="hidden" name="re_fname" value="${LOGINUSER.m_fname}"/>
                         <div class="row">
                            <div class="col-12">
                               <div class="form-group">
@@ -390,7 +374,7 @@
                            </div>
                         </div>
                         <div class="form-group">
-                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">작성하기</button>
+                           <button type="button" id="rebtn" class="button button-contactForm btn_1 boxed-btn">작성하기</button>
                         </div>
                      </form>
                   </div>
@@ -399,30 +383,29 @@
                         <div class="blog_right_sidebar">
                            <aside class="single_sidebar_widget search_widget">
                                 <div class="select-job-items1">
-                                <form name="S" method="post" action="search">
-                                    <select name="searchOption" id="searchOption">
-                                    	<option value="all">전체에서 찾기</option>
-                                        <option value="b_subject">제목으로 찾기</option>
-                                        <option value="b_writer">아이디로 찾기</option>
-                                        <option value="b_content">내용으로 찾기</option>
-                                    </select>	               
+	                                <form name="S" method="post" action="search" id="srchForm">
+	                                    <select name="searchOption" id="searchOption">
+	                                    	<option value="all">전체에서 찾기</option>
+	                                        <option value="b_subject">제목으로 찾기</option>
+	                                        <option value="b_writer">아이디로 찾기</option>
+	                                        <option value="b_content">내용으로 찾기</option>
+	                                    </select>	               
 	                                    <div class="form-group">
 	                                        <div class="input-group mb-3">
 	                                            <input type="text" class="form-control"  id="keyword" name="keyword" placeholder='검색어를 입력하세요..'
 	                                                onfocus="this.placeholder = ''"
 	                                                onblur="this.placeholder = '검색어를 입력하세요..'">
 	                                            <div class="input-group-append">
-	                                                <button class="btns" id="searchOk1" type="button"><i class="ti-search"></i></button>
+	                                                <button class="btns" style="cursor: inherit;" disabled><i class="ti-search"></i></button>
 	                                            </div>
 	                                        </div>
 	                                    </div>
-	                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-	                                        type="submit">검 색</button>
+	                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" id="srchbtn">검 색</button>
 	                                </form>
                                 </div>
                             </aside>
                             <aside class="single_sidebar_widget search_widget">
-						<a href="write" class="genric-btn danger w-100 mb-10" style="line-height: 50px">새 글 쓰기</a>
+								<a href="write" class="genric-btn danger w-100 mb-10" style="line-height: 50px">새 글 쓰기</a>
 							</aside>
 		                     <aside class="single_sidebar_widget post_category_widget">
 		                        <h4 class="widget_title">카테고리</h4>
@@ -530,12 +513,13 @@
 			                                 </c:when>
 			                                 <c:otherwise>
 			                                    <li><a href="logout.do">로그아웃</a></li>
+			                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
 			                                 </c:otherwise>
 			                            </c:choose>
 										<li><a href="listing.do">국내여행지</a></li>
 										<li><a href="use.do">이용방법</a>
-										<li><a onclick="goPlanner()">나의 여행 만들기</a></li>
-										<li><a onclick="goSupport()">문의하기</a></li>
+										<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+										<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -632,21 +616,60 @@ function goReviewDetail(b_id){
 	   }
 }
 function logout(){
-	  swal({
-			text: "로그아웃 하시겠습니까 ?",
-			buttons:{"확인":true,cancel:"취소"},
-			}).then((value) => {
-				if(value){
-					 swal({
-							text: "로그아웃 되었습니다.",
-							buttons:{"확인":true},
-							}).then((value) => {
-								if(value){
-									location.href="logout.do";
-								}
-							});				
-				}
-			});  
+    swal({
+        text: "로그아웃 하시겠습니까 ?",
+        buttons:{"확인":true,cancel:"취소"},
+        }).then((value) => {
+           if(value){
+               swal({
+                    text: "로그아웃 되었습니다.",
+                    buttons:{"확인":true},
+                    }).then((value) => {
+                       if(value){
+                          location.href="logout.do";
+                       }else{
+                          location.href="logout.do";
+                       }
+                    });            
+           }
+        });  
+}
+document.getElementById('rebtn').onclick = function(){	
+	if(document.commentForm.re_content.value == ""){
+		swal({
+			text: "댓글 내용을 입력해주세요.",
+			buttons:{"확인":"확인"},
+		}).then((value) => {
+			if(value=="확인"){
+				document.commentForm.re_content.focus();
+			}
+		});
+	}else{
+		swal({
+			text: "댓글을 저장하시겠습니까?",
+			buttons:{"확인":"확인",cancel:"취소"},
+		}).then((value) => {
+			if(value=="확인"){
+				document.commentForm.submit();
+			}else{
+				return;
+			}
+		});
+	}
+}
+document.getElementById('srchbtn').onclick = function(){
+	if(document.S.keyword.value == ""){
+		swal({
+			text: "검색어를 입력해주세요.",
+			buttons:{"확인":"확인"}
+		}).then((value) => {
+			if(value=="확인"){
+				return;
+			}
+		});
+	}else{
+		document.S.submit();
+	}
 }
 </script>
   <!-- JS here -->

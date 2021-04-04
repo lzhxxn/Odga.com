@@ -16,7 +16,7 @@ public class TempKey {
         
         for (int i = 0 ; i < keyLength ; i++) {
             
-            int idx = (int) (keySet.length * Math.random()); // 62 * 생성된 난수를 Int로 추출 (소숫점제거)
+            int idx = (int) (keySet.length * Math.random());
             sb.append(keySet[idx]);
         }
         return sb.toString();

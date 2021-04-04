@@ -24,7 +24,7 @@
 	</resultMap>
 	
 	<select id="listMyLike" parameterType="long" resultMap="Review">
-		select * from board where b_id IN(select b_id from like_t where m_id=#{m_id})
+		select * from board where b_id IN(select b_id from like_t where m_id=#{m_id} and likeflag=1)
 	</select>
 	
 	<!-- 회원 정보 수정 -->
@@ -44,9 +44,24 @@
 		select * from planner where m_id= #{m_id} order by p_id desc
 	</select>
 	
+	<!--나의 일정 가져올 때 null값 삭제 -->
+	<delete id="nullPlanDel" parameterType="long">	
+		delete from planner where p_title is null and m_id=#{m_id}		
+	</delete>
+	
 	<!-- 마이페이지 나의 일정 디테일 정보 -->	
 	<select id="thisplanner" parameterType="long" resultType="Planner">
 	select * from planner where p_id= #{p_id}
+	</select>
+	
+	<!-- 마이페이지 나의 일정 디테일 이미지 -->	
+	<select id="plannerImg" parameterType="long" resultType="Touritems">
+	select sp_id,contentid,firstimage from touritems natural join s_planner where contentid IN
+	(select contentid from 
+	(select ROW_NUMBER() OVER(PARTITION BY p_id ORDER BY sp_id DESC) AS RNUM
+	,contentid from s_planner) where contentid IN
+	(select contentid from s_planner where p_id IN(select p_id from planner where m_id=#{m_id}))
+	and rnum=1) order by sp_id desc
 	</select>
 	
 	<select id="planDetail" parameterType="long" resultType="S_Planner">
